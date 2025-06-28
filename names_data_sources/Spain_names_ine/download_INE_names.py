@@ -30,6 +30,6 @@ if response.status_code == 200:
     final_df = combined_df[['Nombre', 'Frecuencia', 'Edad Media (*)', 'Gender']]
 
     # Write the DataFrame to a CSV file
-    final_df.to_csv('names_frecuencia_edad_media.csv', index=False)
+    final_df.to_csv('output_data/names_frecuencia_edad_media.csv', index=False)
 else:
     print(f"Failed to download the file. Status code: {response.status_code}")

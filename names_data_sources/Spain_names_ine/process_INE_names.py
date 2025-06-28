@@ -84,7 +84,7 @@ def identify_compound_names(csv_file_path):
     return df
 
 # Call the function with the path to your CSV file
-calculate_name_percentage('names_frecuencia_edad_media.csv')
-add_name_popularity_rank('names_frecuencia_edad_media.csv')
-identify_compound_names('names_frecuencia_edad_media.csv')
-add_syllable_and_character_counts('names_frecuencia_edad_media.csv')
+calculate_name_percentage('output_data/names_frecuencia_edad_media.csv')
+add_name_popularity_rank('output_data/names_frecuencia_edad_media.csv')
+identify_compound_names('output_data/names_frecuencia_edad_media.csv')
+add_syllable_and_character_counts('output_data/names_frecuencia_edad_media.csv')

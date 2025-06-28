@@ -35,9 +35,20 @@ ENV/
 .DS_Store
 
 # Project specific
+# Ignore CSV files except in output_data directories
 *.csv
+!**/output_data/**/*.csv
+!**/output_data/*.csv
 *.txt.gz
 *.zip
-downloaded_data/*
+
+# Ignore downloaded_data directories and all contents
+downloaded_data/
+**/downloaded_data/
+**/downloaded_data/**/*
+
+# Allow output_data directories and contents
 !output_data/
-!output_data/* 
+!output_data/*
+!**/output_data/
+!**/output_data/* 
