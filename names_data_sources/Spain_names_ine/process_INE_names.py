@@ -1,5 +1,6 @@
 import pandas as pd
 import nltk
+from pathlib import Path
 
 # Ensure you have the necessary NLTK data downloaded
 nltk.download('punkt', quiet=True)
@@ -84,7 +85,9 @@ def identify_compound_names(csv_file_path):
     return df
 
 # Call the function with the path to your CSV file
-calculate_name_percentage('output_data/names_frecuencia_edad_media.csv')
-add_name_popularity_rank('output_data/names_frecuencia_edad_media.csv')
-identify_compound_names('output_data/names_frecuencia_edad_media.csv')
-add_syllable_and_character_counts('output_data/names_frecuencia_edad_media.csv')
+script_dir = Path(__file__).parent
+csv_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
+calculate_name_percentage(str(csv_file))
+add_name_popularity_rank(str(csv_file))
+identify_compound_names(str(csv_file))
+add_syllable_and_character_counts(str(csv_file))

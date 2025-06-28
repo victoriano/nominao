@@ -1,5 +1,6 @@
 import csv
 import requests
+from pathlib import Path
 
 # Function to get metadata for a given name
 def get_name_metadata(name):
@@ -22,4 +23,6 @@ def process_names(file_path, top_n):
 
 # Process the top N names and print their metadata
 top_n = 5  # Define the number of top names to process and print
-process_names('output_data/names_frecuencia_edad_media.csv', top_n)
+script_dir = Path(__file__).parent
+csv_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
+process_names(str(csv_file), top_n)

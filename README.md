@@ -49,25 +49,42 @@ Each data source has its own automated pipeline. Simply run the main script for 
 
 ### USA SSA Names Data
 
+**Option 1: Using uv from project root (recommended):**
+```bash
+uv run names_data_sources/USA_names_ssa/main.py              # Complete pipeline
+uv run names_data_sources/USA_names_ssa/main.py --skip-download     # Skip download, use existing data
+uv run names_data_sources/USA_names_ssa/main.py --convert-only      # Only convert to parquet
+uv run names_data_sources/USA_names_ssa/main.py --download-only     # Only download data
+```
+
+**Option 2: From USA directory:**
 ```bash
 cd names_data_sources/USA_names_ssa
-uv run main.py
+uv run main.py                    # Complete pipeline
+uv run main.py --skip-download    # Skip download, use existing data
 ```
 
 **What it does:**
-- Downloads national baby names data (1880-2023)
-- Downloads state-level baby names data  
-- Converts all data to efficient Parquet format
-- Outputs: `names_database.parquet` and `state_names_database.parquet`
+- Downloads national baby names data (1880-2023) - 144 years!
+- Downloads state-level baby names data - 51 states + DC
+- Converts all data to efficient Parquet format with zstd compression
+- **Options:** Use `--skip-download` if download fails due to SSA website restrictions
+- Outputs: `output_data/names_database.parquet` and `output_data/state_names_database.parquet`
 
 ### Spanish INE Names Data
 
+**Option 1: Using uv from project root (recommended):**
+```bash
+uv run names_data_sources/Spain_names_ine/main.py              # Complete pipeline
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich # Skip API enrichment (faster)
+```
+
+**Option 2: From Spanish directory:**
 ```bash
 cd names_data_sources/Spain_names_ine
 source ../../.venv/bin/activate
 python main.py                    # Runs complete pipeline (including enrichment)
 python main.py --skip-enrich      # Skip API enrichment (faster)
-python main.py --enrich           # Force enrichment (same as default)
 ```
 
 **What it does:**

@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 from io import BytesIO
+from pathlib import Path
 
 try:
     import xlrd
@@ -30,6 +31,10 @@ if response.status_code == 200:
     final_df = combined_df[['Nombre', 'Frecuencia', 'Edad Media (*)', 'Gender']]
 
     # Write the DataFrame to a CSV file
-    final_df.to_csv('output_data/names_frecuencia_edad_media.csv', index=False)
+    script_dir = Path(__file__).parent
+    output_dir = script_dir / 'output_data'
+    output_dir.mkdir(exist_ok=True)  # Create output_data directory if it doesn't exist
+    output_file = output_dir / 'names_frecuencia_edad_media.csv'
+    final_df.to_csv(output_file, index=False)
 else:
     print(f"Failed to download the file. Status code: {response.status_code}")
