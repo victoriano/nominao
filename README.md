@@ -43,7 +43,19 @@ source .venv/bin/activate  # On Unix/macOS
 uv pip install -r requirements.txt
 ```
 
-## Usage
+## Quick Start (Recommended)
+
+Run these commands from the project root for the fastest setup:
+
+```bash
+# Spanish pipeline (skip API enrichment for speed)
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich
+
+# USA pipeline (convert existing data to parquet)
+uv run names_data_sources/USA_names_ssa/main.py --convert-only
+```
+
+## Detailed Usage
 
 Each data source has its own automated pipeline. Simply run the main script for the desired data source:
 
