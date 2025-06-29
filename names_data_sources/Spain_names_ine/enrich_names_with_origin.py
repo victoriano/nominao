@@ -197,7 +197,7 @@ class NameOriginEnricher:
             origin: The already classified origin of the name
             
         Returns:
-            A text description of the name
+            A text description of the name (cleaned for CSV output)
         """
         try:
             prompt = f"""
@@ -210,14 +210,17 @@ class NameOriginEnricher:
             4. Variantes en otros idiomas
             5. Datos curiosos o interesantes
             
-            Requisitos:
+            Requisitos IMPORTANTES:
             - Máximo 150 palabras
             - Tono informativo pero ameno
+            - NO uses formato markdown (nada de **negrita**, *cursiva*, etc.)
+            - Escribe los nombres siempre en MAYÚSCULAS (ejemplo: MARÍA, JOSÉ, CARMEN)
             - Si es un nombre compuesto, menciona ambos componentes
             - Evita información no verificable o inventada
             - Si no tienes información segura sobre algún aspecto, no lo menciones
+            - Usa solo texto plano, sin símbolos especiales
             
-            Genera la descripción en español.
+            Genera la descripción en español usando solo texto plano.
             """
             
             # Use a simple text generation without structured output for descriptions
@@ -225,6 +228,9 @@ class NameOriginEnricher:
             
             # Clean and return the description
             description = response.text.strip()
+            
+            # Additional cleaning for CSV safety
+            description = self._clean_description_for_csv(description, name)
             
             # Ensure it's not too long
             if len(description) > 500:
@@ -235,6 +241,78 @@ class NameOriginEnricher:
         except Exception as e:
             print(f"Error generating description for '{name}': {e}")
             return f"Nombre de origen {origin}."
+    
+    def _clean_description_for_csv(self, description: str, original_name: str) -> str:
+        """
+        Clean the description text to be CSV-safe
+        
+        Args:
+            description: The raw description text
+            original_name: The original name being described
+            
+        Returns:
+            Cleaned description safe for CSV
+        """
+        import re
+        
+        # Remove markdown formatting
+        description = re.sub(r'\*\*([^*]+)\*\*', r'\1', description)  # **bold** -> text
+        description = re.sub(r'\*([^*]+)\*', r'\1', description)      # *italic* -> text
+        description = re.sub(r'__([^_]+)__', r'\1', description)      # __bold__ -> text
+        description = re.sub(r'_([^_]+)_', r'\1', description)        # _italic_ -> text
+        
+        # Convert name references to ALL CAPS
+        # Split compound names and make each part ALL CAPS
+        name_parts = original_name.split()
+        for part in name_parts:
+            # Use word boundaries to avoid partial matches
+            pattern = r'\b' + re.escape(part.lower()) + r'\b'
+            description = re.sub(pattern, part.upper(), description, flags=re.IGNORECASE)
+            
+            # Also handle the original name format
+            pattern_orig = r'\b' + re.escape(part) + r'\b'
+            description = re.sub(pattern_orig, part.upper(), description)
+        
+        # Also handle the full name
+        full_name_pattern = r'\b' + re.escape(original_name.lower()) + r'\b'
+        description = re.sub(full_name_pattern, original_name.upper(), description, flags=re.IGNORECASE)
+        
+        # Replace problematic characters for CSV
+        description = description.replace('"', "'")  # Replace double quotes with single quotes
+        description = description.replace('\n', ' ')  # Replace newlines with spaces
+        description = description.replace('\r', ' ')  # Replace carriage returns with spaces
+        description = description.replace('\t', ' ')  # Replace tabs with spaces
+        
+        # Clean up multiple spaces
+        description = re.sub(r'\s+', ' ', description)
+        
+        # Remove any remaining special characters that might break CSV
+        description = re.sub(r'[^\w\s\.\,\;\:\!\?\(\)\-\']', '', description)
+        
+        return description.strip()
+    
+    def _clean_text_for_csv(self, text: str) -> str:
+        """
+        Clean any text field to be CSV-safe
+        
+        Args:
+            text: The text to clean
+            
+        Returns:
+            Cleaned text safe for CSV
+        """
+        import re
+        
+        # Replace problematic characters for CSV
+        text = text.replace('"', "'")  # Replace double quotes with single quotes
+        text = text.replace('\n', ' ')  # Replace newlines with spaces
+        text = text.replace('\r', ' ')  # Replace carriage returns with spaces
+        text = text.replace('\t', ' ')  # Replace tabs with spaces
+        
+        # Clean up multiple spaces
+        text = re.sub(r'\s+', ' ', text)
+        
+        return text.strip()
     
     def _get_pronunciation_difficulty(self, name: str, origin: str) -> Dict[str, str]:
         """
@@ -306,11 +384,14 @@ class NameOriginEnricher:
             # Parse JSON response
             result = json.loads(response.text)
             
-            # Ensure all required fields are present
+            # Ensure all required fields are present and clean for CSV
+            explanation = result.get('explanation', 'Sin información de pronunciación disponible.')
+            explanation = self._clean_text_for_csv(explanation)
+            
             return {
                 'spanish': result.get('spanish', 'fácil'),
                 'foreign': result.get('foreign', 'difícil'),
-                'explanation': result.get('explanation', 'Sin información de pronunciación disponible.')
+                'explanation': explanation
             }
             
         except Exception as e:
@@ -351,7 +432,7 @@ class NameOriginEnricher:
             
             # Process the random sample
             with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
-                writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+                writer = csv.DictWriter(outfile, fieldnames=fieldnames, quoting=csv.QUOTE_MINIMAL)
                 writer.writeheader()
                 
                 for row in selected_rows:
@@ -384,7 +465,7 @@ class NameOriginEnricher:
                 fieldnames = list(reader.fieldnames) + new_columns if reader.fieldnames else new_columns
                 
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
-                    writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+                    writer = csv.DictWriter(outfile, fieldnames=fieldnames, quoting=csv.QUOTE_MINIMAL)
                     writer.writeheader()
                     
                     for row in reader:
