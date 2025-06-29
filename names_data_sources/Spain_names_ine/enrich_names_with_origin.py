@@ -386,7 +386,7 @@ class NameOriginEnricher:
             
             # Ensure all required fields are present and clean for CSV
             explanation = result.get('explanation', 'Sin información de pronunciación disponible.')
-            explanation = self._clean_text_for_csv(explanation)
+            explanation = self._clean_description_for_csv(explanation, name)  # Apply full cleaning including name capitalization
             
             return {
                 'spanish': result.get('spanish', 'fácil'),
