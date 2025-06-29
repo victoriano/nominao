@@ -2,7 +2,9 @@ import csv
 import os
 import time
 import random
+import json
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 import google.generativeai as genai
 from dotenv import load_dotenv
 
@@ -75,7 +77,37 @@ class NameOriginEnricher:
         
         self.model = genai.GenerativeModel('gemini-2.5-flash')
 
-    def classify_name_origin(self, name):
+    def get_all_enrichments(self, name: str) -> Dict[str, str]:
+        """
+        Get all enrichments for a name. This is the main method that coordinates
+        all enrichment functions and returns a dictionary with all new columns.
+        
+        Args:
+            name: The name to enrich
+            
+        Returns:
+            Dictionary with column names as keys and enriched values
+        """
+        enrichments = {}
+        
+        # Get origin classification
+        origin = self._get_origin_classification(name)
+        enrichments['Family_Origin'] = origin
+        
+        # Get name description
+        description = self._get_name_description(name, origin)
+        enrichments['Name_Description'] = description
+        
+        # Future enrichments can be added here:
+        # enrichments['Name_Popularity'] = self._get_name_popularity(name)
+        # enrichments['Name_Gender_Distribution'] = self._get_gender_distribution(name)
+        # enrichments['Name_Geographic_Distribution'] = self._get_geographic_distribution(name)
+        # enrichments['Name_Variants'] = self._get_name_variants(name)
+        # enrichments['Name_Sentiment'] = self._get_name_sentiment(name)
+        
+        return enrichments
+    
+    def _get_origin_classification(self, name: str) -> str:
         """Classify a single name's origin using Gemini API with structured output"""
         try:
             # Create the prompt for classification
@@ -140,7 +172,6 @@ class NameOriginEnricher:
             )
             
             # Parse JSON response
-            import json
             result = json.loads(response.text)
             origin = result.get('origin', 'Otro')
             
@@ -149,10 +180,58 @@ class NameOriginEnricher:
         except Exception as e:
             print(f"Error classifying name '{name}': {e}")
             return 'Otro'
+    
+    def _get_name_description(self, name: str, origin: str) -> str:
+        """
+        Generate a description of the name including its meaning, origin, and interesting facts
+        
+        Args:
+            name: The name to describe
+            origin: The already classified origin of the name
+            
+        Returns:
+            A text description of the name
+        """
+        try:
+            prompt = f"""
+            Genera una descripción breve pero interesante sobre el nombre "{name}" considerando que su origen es {origin}.
+            
+            La descripción debe incluir (cuando sea aplicable):
+            1. Significado etimológico del nombre
+            2. Historia o contexto cultural
+            3. Personajes famosos o referencias culturales
+            4. Variantes en otros idiomas
+            5. Datos curiosos o interesantes
+            
+            Requisitos:
+            - Máximo 150 palabras
+            - Tono informativo pero ameno
+            - Si es un nombre compuesto, menciona ambos componentes
+            - Evita información no verificable o inventada
+            - Si no tienes información segura sobre algún aspecto, no lo menciones
+            
+            Genera la descripción en español.
+            """
+            
+            # Use a simple text generation without structured output for descriptions
+            response = self.model.generate_content(prompt)
+            
+            # Clean and return the description
+            description = response.text.strip()
+            
+            # Ensure it's not too long
+            if len(description) > 500:
+                description = description[:497] + "..."
+            
+            return description
+            
+        except Exception as e:
+            print(f"Error generating description for '{name}': {e}")
+            return f"Nombre de origen {origin}."
 
     def enrich_names_file(self, input_file, output_file, max_names=None, delay=1, random_sample=False):
         """
-        Enrich names from CSV file with origin classification
+        Enrich names from CSV file with multiple enrichment columns
         
         Args:
             input_file: Path to input CSV file
@@ -163,12 +242,15 @@ class NameOriginEnricher:
         """
         processed_count = 0
         
+        # Define the new columns we'll be adding
+        new_columns = ['Family_Origin', 'Name_Description']
+        
         # First, read all rows if we need to do random sampling
         if random_sample and max_names:
             with open(input_file, 'r', encoding='utf-8') as infile:
                 reader = csv.DictReader(infile)
                 all_rows = list(reader)
-                fieldnames = list(reader.fieldnames) + ['Family_Origin'] if reader.fieldnames else ['Family_Origin']
+                fieldnames = list(reader.fieldnames) + new_columns if reader.fieldnames else new_columns
                 
             # Randomly sample rows
             sample_size = min(max_names, len(all_rows))
@@ -182,17 +264,19 @@ class NameOriginEnricher:
                 for row in selected_rows:
                     name = row['Nombre']
                     
-                    # Classify the name origin
-                    origin = self.classify_name_origin(name)
+                    # Get all enrichments for this name
+                    enrichments = self.get_all_enrichments(name)
                     
-                    # Add the origin to the row
-                    row['Family_Origin'] = origin
+                    # Add all enrichments to the row
+                    row.update(enrichments)
                     
                     # Write the enriched row
                     writer.writerow(row)
                     
                     processed_count += 1
-                    print(f"Processed {processed_count}: {name} -> {origin}")
+                    print(f"Processed {processed_count}: {name}")
+                    print(f"  - Origin: {enrichments['Family_Origin']}")
+                    print(f"  - Description: {enrichments['Name_Description'][:80]}...")
                     
                     # Add delay to respect API rate limits
                     if delay > 0:
@@ -202,8 +286,8 @@ class NameOriginEnricher:
             with open(input_file, 'r', encoding='utf-8') as infile:
                 reader = csv.DictReader(infile)
                 
-                # Get the original fieldnames and add the new field
-                fieldnames = list(reader.fieldnames) + ['Family_Origin'] if reader.fieldnames else ['Family_Origin']
+                # Get the original fieldnames and add the new columns
+                fieldnames = list(reader.fieldnames) + new_columns if reader.fieldnames else new_columns
                 
                 with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
                     writer = csv.DictWriter(outfile, fieldnames=fieldnames)
@@ -215,17 +299,19 @@ class NameOriginEnricher:
                         
                         name = row['Nombre']
                         
-                        # Classify the name origin
-                        origin = self.classify_name_origin(name)
+                        # Get all enrichments for this name
+                        enrichments = self.get_all_enrichments(name)
                         
-                        # Add the origin to the row
-                        row['Family_Origin'] = origin
+                        # Add all enrichments to the row
+                        row.update(enrichments)
                         
                         # Write the enriched row
                         writer.writerow(row)
                         
                         processed_count += 1
-                        print(f"Processed {processed_count}: {name} -> {origin}")
+                        print(f"Processed {processed_count}: {name}")
+                        print(f"  - Origin: {enrichments['Family_Origin']}")
+                        print(f"  - Description: {enrichments['Name_Description'][:80]}...")
                         
                         # Add delay to respect API rate limits
                         if delay > 0:
@@ -233,17 +319,18 @@ class NameOriginEnricher:
         
         print(f"\nCompleted processing {processed_count} names")
         print(f"Enriched data saved to: {output_file}")
+        print(f"Added columns: {', '.join(new_columns)}")
     
     def test_random_names(self, input_file, num_names=5):
         """
-        Test the classifier with random names from the dataset
+        Test the enrichment system with random names from the dataset
         
         Args:
             input_file: Path to input CSV file
             num_names: Number of random names to test (default: 5)
         """
         print(f"\nTesting with {num_names} random names from the dataset...")
-        print("-" * 60)
+        print("=" * 80)
         
         with open(input_file, 'r', encoding='utf-8') as infile:
             reader = csv.DictReader(infile)
@@ -255,11 +342,32 @@ class NameOriginEnricher:
         
         for i, row in enumerate(selected_rows, 1):
             name = row['Nombre']
-            origin = self.classify_name_origin(name)
-            print(f"{i}. {name} -> {origin}")
+            print(f"\n{i}. Nombre: {name}")
+            print("-" * 40)
+            
+            # Get all enrichments
+            enrichments = self.get_all_enrichments(name)
+            
+            # Display results
+            print(f"   Origen: {enrichments['Family_Origin']}")
+            print(f"   Descripción:")
+            
+            # Word wrap the description for better display
+            description = enrichments['Name_Description']
+            words = description.split()
+            current_line = "   "
+            for word in words:
+                if len(current_line) + len(word) + 1 > 80:
+                    print(current_line)
+                    current_line = "   " + word
+                else:
+                    current_line += " " + word
+            if current_line.strip():
+                print(current_line)
+            
             time.sleep(1)  # Small delay between API calls
         
-        print("-" * 60)
+        print("\n" + "=" * 80)
 
 def main():
     """Main function to run the name origin enrichment"""

@@ -185,6 +185,17 @@ The integrated pipeline generates multiple files:
 
 Each classified file contains all original columns PLUS:
 - `Family_Origin`: The AI-classified etymological origin (35 categories)
+- `Name_Description`: Rich text description including etymology, cultural significance, and interesting facts
+
+**Example Output:**
+```
+Nombre: MARIA CARMEN
+Family_Origin: Español
+Name_Description: Maria Carmen es un nombre compuesto de profundo arraigo español, 
+que une dos pilares de la tradición. 'María', de origen hebreo (Miryam), significa 
+'la amada' o 'señora del mar'. 'Carmen' proviene del latín y hebreo, asociado con 
+el Monte Carmelo y la Virgen del Carmen, patrona de marineros...
+```
 
 ##### Pipeline Integration Benefits
 
@@ -341,6 +352,21 @@ Names of Hebrew/Biblical and Latin origin are classified as Spanish due to cultu
 **File Format:**
 Each output file contains all original columns plus:
 - `Family_Origin`: The classified etymological origin
+
+#### Extensible Architecture
+
+The enrichment system is designed to be easily extensible. New enrichment columns can be added by:
+
+1. Creating a new method in the `NameOriginEnricher` class (e.g., `_get_name_popularity()`)
+2. Adding the call to `get_all_enrichments()`
+3. Updating the `new_columns` list
+
+Future enrichment ideas already scaffolded in the code:
+- Name popularity trends over time
+- Gender distribution analysis
+- Geographic distribution patterns
+- Name variants in other languages
+- Sentiment analysis of names
 
 #### Classification Examples
 
