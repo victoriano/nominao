@@ -277,6 +277,10 @@ Examples:
   python enrich_names_with_origin.py --random 25       # Process 25 random names and save to file
   python enrich_names_with_origin.py --test-random 5   # Quick test with 5 random names (no file)
   python enrich_names_with_origin.py --all             # Process ALL names (may take hours!)
+  
+  # Custom input/output files:
+  python enrich_names_with_origin.py --num 100 --output-file my_enriched_names.csv
+  python enrich_names_with_origin.py --input-file custom_data.csv --random 50
         """
     )
     
@@ -292,14 +296,38 @@ Examples:
     
     parser.add_argument('--delay', type=float, default=1.0,
                        help='Delay between API calls in seconds (default: 1.0)')
+    parser.add_argument('--input-file', type=str,
+                       help='Custom input file path (default: names_frecuencia_edad_media.csv)')
+    parser.add_argument('--output-file', type=str,
+                       help='Custom output file path (default: auto-generated based on mode)')
     
     args = parser.parse_args()
     
     # Set up file paths
     script_dir = Path(__file__).parent
-    input_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
+    
+    # Input file - use custom path if provided, otherwise default
+    if args.input_file:
+        input_file = Path(args.input_file)
+        if not input_file.is_absolute():
+            input_file = script_dir / args.input_file
+    else:
+        input_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
+    
+    # Set default output files first
     output_file = script_dir / 'output_data' / 'names_with_origin.csv'
     output_file_random = script_dir / 'output_data' / 'names_with_origin_random_sample.csv'
+    
+    # Override with custom output file if provided
+    if args.output_file:
+        custom_output = Path(args.output_file)
+        if not custom_output.is_absolute():
+            custom_output = script_dir / args.output_file
+        
+        if args.random is not None:
+            output_file_random = custom_output
+        else:
+            output_file = custom_output
     
     # Check if input file exists
     if not input_file.exists():
