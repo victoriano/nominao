@@ -16,47 +16,46 @@ class NameOriginEnricher:
         
         genai.configure(api_key=self.api_key)
         
-        # Define the valid categories - reduced from 200+ to 37 categories
+        # Define the valid categories - 35 categories total
         # Based on analysis of https://buscador-nombres-bebes.com/categorias/#por-origen
         # Filtered origins with <10 names and merged similar categories
+        # NOTE: Hebrew/Biblical and Latin names are now classified as Spanish due to cultural assimilation
         self.valid_categories = [
-            'Africano',      # Includes: Africano, Akan, Hausa, Yoruba, Wolof, Mandinga, Swahili, etc.
-            'Americano',     # Includes: Maya, Náhuatl, Quechua, Guaraní, Mapuche, Taíno, Indígena
-            'Arameo',        # Includes: Arameo, Asirio, Babilónico
-            'Armenio',       # Armenian names
-            'Catalán',       # Catalan names
-            'Celta',         # Includes: Celta, Gaélico, Galés, Irlandés, Escocés
-            'Chino',         # Includes: Chino, Mandarín
-            'Contemporáneo', # Includes: Contemporáneo, Neológico, Ficticio, Literario
-            'Coreano',       # Korean names
-            'Desconocido',   # Unknown origin
-            'Egipcio',       # Egyptian names
-            'Escandinavo',   # Includes: Escandinavo, Nórdico, Danés, Sueco, Noruego, Finlandés
-            'Eslavo',        # Includes: Eslavo, Ruso, Ucraniano, Polaco, Checo, Búlgaro, Serbio, etc.
-            'Español',       # Includes: Español, Castellano, Hispano, Hispánico
-            'Francés',       # Includes: Francés, Bretón, Provenzal, Occitano
-            'Gallego',       # Galician names
-            'Georgiano',     # Georgian names
-            'Germánico',     # Includes: Germánico, Alemán, Anglosajón, Gótico, Visigodo
-            'Griego',        # Greek names
-            'Guanche',       # Canary Islands indigenous names
-            'Hawaiano',      # Includes: Hawaiano, Polinesio
-            'Hebreo',        # Includes: Hebreo, Hebraico, Bíblico
-            'Húngaro',       # Hungarian names
-            'Indonesio',     # Includes: Indonesio, Javanés
-            'Inglés',        # Includes: Inglés, Angloamericano, Anglófono
-            'Italiano',      # Italian names
-            'Japonés',       # Japanese names
-            'Latino',        # Includes: Latino, Romano
-            'Lituano',       # Includes: Lituano, Letón, Báltico
-            'Persa',         # Includes: Persa, Iraní
-            'Portugués',     # Includes: Portugués, Brasileño
-            'Rumano',        # Romanian names
-            'Sánscrito',     # Includes: Sánscrito, Hindú, Indio, Panyabí, Urdu
-            'Turco',         # Includes: Turco, Túrquico
-            'Vasco',         # Includes: Vasco, Euskera
-            'Árabe',         # Includes: Árabe, Bereber, Amazigh
-            'Otro'           # Other/uncategorized
+            'Africano',         # Includes: Africano, Akan, Hausa, Yoruba, Wolof, Mandinga, Swahili, etc.
+            'Alemán',           # German names, Teutonic origin
+            'Anglosajón',       # Anglo-Saxon, Celtic, Gaelic, Welsh, Irish, Scottish, English, Old English
+            'Arameo',           # Includes: Arameo, Asirio, Babilónico
+            'Armenio',          # Armenian names
+            'Catalán',          # Catalan names
+            'Chino',            # Includes: Chino, Mandarín
+            'Contemporáneo',    # Includes: Contemporáneo, Neológico, Ficticio, Literario
+            'Coreano',          # Korean names
+            'Desconocido',      # Unknown origin
+            'Egipcio',          # Egyptian names
+            'Escandinavo',      # Includes: Escandinavo, Nórdico, Danés, Sueco, Noruego, Finlandés
+            'Eslavo',           # Includes: Eslavo, Ruso, Ucraniano, Polaco, Checo, Búlgaro, Serbio, etc.
+            'Español',          # Includes: Español, Castellano, Hispano, Hispánico, Latino, Hebreo/Bíblico
+            'Francés',          # Includes: Francés, Bretón, Provenzal, Occitano
+            'Gallego',          # Galician names
+            'Georgiano',        # Georgian names
+            'Griego',           # Greek names
+            'Guanche',          # Canary Islands indigenous names
+            'Hawaiano',         # Includes: Hawaiano, Polinesio
+            'Húngaro',          # Hungarian names
+            'Indonesio',        # Includes: Indonesio, Javanés
+            'Italiano',         # Italian names
+            'Japonés',          # Japanese names
+            'Latinoamericano',  # Spanish-sounding names typical of Latin America, rare in Spain
+            'Lituano',          # Includes: Lituano, Letón, Báltico
+            'Nativo Americano', # Includes: Maya, Náhuatl, Quechua, Guaraní, Mapuche, Taíno, Indígena
+            'Persa',            # Includes: Persa, Iraní
+            'Portugués',        # Includes: Portugués, Brasileño
+            'Rumano',           # Romanian names
+            'Sánscrito',        # Includes: Sánscrito, Hindú, Indio, Panyabí, Urdu
+            'Turco',            # Includes: Turco, Túrquico
+            'Vasco',            # Includes: Vasco, Euskera
+            'Árabe',            # Includes: Árabe, Bereber, Amazigh
+            'Otro'              # Other/uncategorized
         ]
         
         # Create model with structured output configuration
@@ -83,30 +82,40 @@ class NameOriginEnricher:
             prompt = f"""
             Analiza el siguiente nombre español y clasifícalo según su origen etimológico.
             
-            Para nombres compuestos (dos nombres unidos como "Maria Carmen"), analiza 
-            el origen predominante o más relevante de los componentes.
+            Para nombres compuestos (dos nombres unidos como "Maria Carmen"), aplica estas reglas:
+            1. Si contiene mezcla de anglosajón + español → "Latinoamericano"
+               - "Brandon José" → "Latinoamericano"
+               - "Jennifer María" → "Latinoamericano" 
+               - "Brayan Antonio" → "Latinoamericano"
+            2. Para otros casos, clasificar según el componente MÁS ALEJADO del español y latino:
+               - "María Aitor" → "Vasco" (por Aitor, no por María)
+               - "Juan Chen" → "Chino" (por Chen, no por Juan)
+               - "Rosa Fatima" → "Árabe" (por Fatima, no por Rosa)
+               - "Carmen Yuki" → "Japonés" (por Yuki, no por Carmen)
             
-            Usa estas categorías según el origen:
-            
-            - "Latino": Origen romano/latín clásico (incluye nombres romanos)
-            - "Griego": Origen griego antiguo
-            - "Hebreo": Origen hebreo, judaico o bíblico
-            - "Germánico": Origen germánico (incluye visigodo, franco, alemán, anglosajón)
-            - "Árabe": Origen árabe, bereber o del norte de África musulmán
-            - "Español": Específicamente castellano o hispano (no catalán/gallego/vasco)
-            - "Catalán": Origen catalán
-            - "Gallego": Origen gallego
-            - "Vasco": Origen vasco o euskera
-            - "Francés": Origen francés, bretón, provenzal u occitano
-            - "Italiano": Origen italiano
-            - "Inglés": Origen inglés o angloamericano
-            - "Celta": Origen celta, gaélico, irlandés, escocés o galés
-            - "Eslavo": Origen eslavo (ruso, polaco, ucraniano, búlgaro, serbio, etc.)
-            - "Escandinavo": Origen nórdico, danés, sueco, noruego o finlandés
-            - "Sánscrito": Origen sánscrito, hindú o de la India
-            - "Chino": Origen chino o mandarín
-            - "Japonés": Origen japonés
-            - "Americano": Origen indígena americano (maya, náhuatl, quechua, etc.)
+                         Usa estas categorías según el origen:
+             
+             - "Español": Nombres españoles, castellanos, hispanos, INCLUYENDO:
+               * Los de origen latino/romano y hebreo/bíblico asimilados (María, José, Carmen, Antonio)
+               * Nombres germanizados/castellanizados (Guillermo, Carlos, Francisco, Fernando, etc.)
+               * Solo clasifica como otra categoría si el nombre mantiene su forma extranjera original
+                          - "Griego": Origen griego antiguo, pero solo si mantiene forma griega (no españolizada)
+             - "Alemán": Solo nombres en su forma alemana original (Wilhelm, nicht Guillermo; Karl, nicht Carlos)
+             - "Anglosajón": Origen anglosajón, celta, gaélico, irlandés, escocés, galés, inglés o angloamericano
+             - "Árabe": Origen árabe, bereber o del norte de África musulmán
+             - "Catalán": Origen catalán
+             - "Gallego": Origen gallego
+             - "Vasco": Origen vasco o euskera
+             - "Francés": Origen francés, bretón, provenzal u occitano
+             - "Italiano": Origen italiano
+             - "Eslavo": Origen eslavo (ruso, polaco, ucraniano, búlgaro, serbio, etc.)
+             - "Escandinavo": Origen nórdico, danés, sueco, noruego o finlandés
+             - "Sánscrito": Origen sánscrito, hindú o de la India
+             - "Chino": Origen chino o mandarín
+             - "Japonés": Origen japonés
+             - "Nativo Americano": Origen indígena americano (maya, náhuatl, quechua, etc.)
+             - "Latinoamericano": Nombres que suenan españoles pero son MUY típicos de Latinoamérica 
+               y muy infrecuentes en España (Yeimy, Brayan, Jhon, Dayanna, etc.)
             - "Africano": Origen africano subsahariano
             - "Turco": Origen turco o túrquico
             - "Persa": Origen persa o iraní
