@@ -214,7 +214,7 @@ class NameOriginEnricher:
             - Máximo 150 palabras
             - Tono informativo pero ameno
             - NO uses formato markdown (nada de **negrita**, *cursiva*, etc.)
-            - Escribe los nombres siempre en MAYÚSCULAS (ejemplo: MARÍA, JOSÉ, CARMEN)
+            - Escribe los nombres siempre con la primera letra en mayúscula (ejemplo: María, José, Carmen)
             - Si es un nombre compuesto, menciona ambos componentes
             - Evita información no verificable o inventada
             - Si no tienes información segura sobre algún aspecto, no lo menciones
@@ -261,21 +261,21 @@ class NameOriginEnricher:
         description = re.sub(r'__([^_]+)__', r'\1', description)      # __bold__ -> text
         description = re.sub(r'_([^_]+)_', r'\1', description)        # _italic_ -> text
         
-        # Convert name references to ALL CAPS
-        # Split compound names and make each part ALL CAPS
+        # Convert name references to proper capitalization (Title Case)
+        # Split compound names and make each part properly capitalized
         name_parts = original_name.split()
         for part in name_parts:
             # Use word boundaries to avoid partial matches
             pattern = r'\b' + re.escape(part.lower()) + r'\b'
-            description = re.sub(pattern, part.upper(), description, flags=re.IGNORECASE)
+            description = re.sub(pattern, part.title(), description, flags=re.IGNORECASE)
             
             # Also handle the original name format
             pattern_orig = r'\b' + re.escape(part) + r'\b'
-            description = re.sub(pattern_orig, part.upper(), description)
+            description = re.sub(pattern_orig, part.title(), description)
         
         # Also handle the full name
         full_name_pattern = r'\b' + re.escape(original_name.lower()) + r'\b'
-        description = re.sub(full_name_pattern, original_name.upper(), description, flags=re.IGNORECASE)
+        description = re.sub(full_name_pattern, original_name.title(), description, flags=re.IGNORECASE)
         
         # Replace problematic characters for CSV
         description = description.replace('"', "'")  # Replace double quotes with single quotes
