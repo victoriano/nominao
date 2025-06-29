@@ -55,6 +55,15 @@ set GEMINI_API_KEY=your_api_key_here       # Windows
 
 Get your API key from: https://makersuite.google.com/app/apikey
 
+## Recent Updates
+
+### Version 2.0 - AI-Powered Name Enrichment
+- **NEW**: Added rich name descriptions with etymology and cultural context
+- **NEW**: Pronunciation difficulty analysis for Spanish and foreign speakers
+- **NEW**: Modular architecture for easy addition of new enrichment columns
+- **IMPROVED**: Refactored code for better maintainability and extensibility
+- **ENHANCED**: More detailed output with comprehensive name analysis including pronunciation challenges
+
 ## Quick Start (Recommended)
 
 Run these commands from the project root for the fastest setup:
@@ -178,23 +187,34 @@ The integrated pipeline generates multiple files:
 1. **Base Processing Output:**
    - `output_data/names_frecuencia_edad_media.csv` - Enriched with all metadata columns
 
-2. **Origin Classification Output:**
+2. **Origin Classification & Enrichment Output:**
    - Sequential mode: `output_data/names_with_origin.csv`
    - Random mode: `output_data/names_with_origin_random_sample.csv`
    - Custom: Your specified filename via `--origin-output`
 
-Each classified file contains all original columns PLUS:
+Each enriched file contains all original columns PLUS:
 - `Family_Origin`: The AI-classified etymological origin (35 categories)
 - `Name_Description`: Rich text description including etymology, cultural significance, and interesting facts
+- `Pronunciation_Spanish`: Pronunciation difficulty for Spanish speakers (muy fácil, fácil, difícil, muy difícil)
+- `Pronunciation_Foreign`: Pronunciation difficulty for foreign speakers (muy fácil, fácil, difícil, muy difícil)
+- `Pronunciation_Explanation`: Detailed explanation of pronunciation challenges
 
-**Example Output:**
-```
-Nombre: MARIA CARMEN
+**File Size Expectations:**
+- Base file: ~3.4 MB for complete dataset
+- Enriched file: Adds ~500-1000 bytes per name for descriptions
+- Example: 10 names = ~6 KB additional data
+
+**Example Output (Real Data):**
+```csv
+Nombre: ANGELA PIEDAD
+Frecuencia: 27
+Edad Media: 46.8
+Gender: Female
 Family_Origin: Español
-Name_Description: Maria Carmen es un nombre compuesto de profundo arraigo español, 
-que une dos pilares de la tradición. 'María', de origen hebreo (Miryam), significa 
-'la amada' o 'señora del mar'. 'Carmen' proviene del latín y hebreo, asociado con 
-el Monte Carmelo y la Virgen del Carmen, patrona de marineros...
+Name_Description: "ANGELA PIEDAD es un nombre compuesto de origen español que fusiona 
+dos conceptos de gran belleza y significado espiritual. Angela proviene del griego 
+'ángelos' (mensajero), evocando la imagen de los ángeles como mensajeros divinos. 
+Piedad, del latín 'pietas', representa devoción, compasión y amor filial..."
 ```
 
 ##### Pipeline Integration Benefits
@@ -232,9 +252,9 @@ uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origi
 - **Options:** Use `--skip-enrich` to skip API calls for faster execution
 - Outputs: `output_data/names_frecuencia_edad_media.csv` with comprehensive name statistics
 
-#### AI-Powered Origin Classification (Standalone)
+#### AI-Powered Origin Classification & Enrichment (Standalone)
 
-**NEW**: Advanced etymological origin classification for Spanish names using Google Gemini AI.
+**NEW**: Advanced AI-powered enrichment for Spanish names using Google Gemini, including etymological origin classification and detailed descriptions.
 
 > **Note**: This section covers standalone usage. For integrated pipeline usage, see [Integrated Pipeline with AI Origin Classification](#integrated-pipeline-with-ai-origin-classification) below.
 
@@ -341,6 +361,27 @@ Names are classified by their **current Spanish form**, not historical etymology
 Names of Hebrew/Biblical and Latin origin are classified as Spanish due to cultural assimilation:
 - "María", "José", "Carmen", "Antonio" → Español
 
+#### Enrichment Features
+
+**NEW in v2.0:**
+- **Name Descriptions**: Rich textual descriptions for each name including:
+  - Etymological meaning and linguistic roots
+  - Cultural and historical context
+  - Famous bearers and cultural references
+  - Variants in other languages
+  - Interesting facts and curiosities
+  - Maximum 150 words per description
+- **Pronunciation Analysis**: Three columns evaluating pronunciation difficulty:
+  - `Pronunciation_Spanish`: Difficulty for Spanish speakers (muy fácil, fácil, difícil, muy difícil)
+  - `Pronunciation_Foreign`: Difficulty for foreign speakers (primarily English speakers)
+  - `Pronunciation_Explanation`: Detailed explanation of specific phonetic challenges
+
+**Original Features:**
+- **35 origin categories**: Comprehensive classification system
+- **Cultural classification**: Names classified by current Spanish form
+- **Smart compound handling**: Special rules for Anglo-Spanish mixes
+- **Structured output**: Guaranteed valid responses using Gemini AI
+
 #### Output Files
 
 **Sequential Processing:**
@@ -352,21 +393,39 @@ Names of Hebrew/Biblical and Latin origin are classified as Spanish due to cultu
 **File Format:**
 Each output file contains all original columns plus:
 - `Family_Origin`: The classified etymological origin
+- `Name_Description`: Detailed description with etymology, meaning, and cultural context
+- `Pronunciation_Spanish`: Difficulty for Spanish speakers
+- `Pronunciation_Foreign`: Difficulty for foreign speakers (primarily English)
+- `Pronunciation_Explanation`: Detailed phonetic analysis
 
 #### Extensible Architecture
 
-The enrichment system is designed to be easily extensible. New enrichment columns can be added by:
+The enrichment system is designed to be modular and easily extensible. New enrichment columns can be added by:
 
-1. Creating a new method in the `NameOriginEnricher` class (e.g., `_get_name_popularity()`)
-2. Adding the call to `get_all_enrichments()`
-3. Updating the `new_columns` list
+1. **Create a new enrichment method** in the `NameOriginEnricher` class:
+   ```python
+   def _get_name_popularity(self, name: str) -> str:
+       # Your enrichment logic here
+       return popularity_info
+   ```
 
-Future enrichment ideas already scaffolded in the code:
-- Name popularity trends over time
-- Gender distribution analysis
-- Geographic distribution patterns
-- Name variants in other languages
-- Sentiment analysis of names
+2. **Add the call** to `get_all_enrichments()`:
+   ```python
+   enrichments['Name_Popularity'] = self._get_name_popularity(name)
+   ```
+
+3. **Update the columns list** in `enrich_names_file()`:
+   ```python
+   new_columns = ['Family_Origin', 'Name_Description', 'Pronunciation_Spanish', 
+                  'Pronunciation_Foreign', 'Pronunciation_Explanation', 'Name_Popularity']
+   ```
+
+**Future enrichment ideas already scaffolded:**
+- **Name_Popularity**: Historical popularity trends
+- **Name_Gender_Distribution**: Gender usage statistics
+- **Name_Geographic_Distribution**: Regional popularity patterns
+- **Name_Variants**: International variations and nicknames
+- **Name_Sentiment**: Sentiment analysis and perception
 
 #### Classification Examples
 
@@ -393,6 +452,21 @@ Both pipelines include:
 - ✅ **Progress tracking** - Clear status messages
 - ✅ **Modular design** - Individual scripts can be run separately
 - ✅ **Data validation** - Ensures data integrity
+
+### Performance & Limitations
+
+**Spanish Names AI Enrichment:**
+- **Processing Speed**: ~1 name/second (with 1s API delay)
+- **API Limits**: Subject to Gemini API quotas
+- **Recommended Batch Size**: 100-1000 names for testing
+- **Full Dataset**: ~107,000 names would take ~30 hours
+- **Cost**: Free tier usually sufficient for small batches
+
+**Tips for Large-Scale Processing:**
+- Use `--random` mode to process representative samples
+- Process in batches with custom output files
+- Monitor API usage in Google AI Studio
+- Consider parallel processing for production use
 
 ## Dependencies
 

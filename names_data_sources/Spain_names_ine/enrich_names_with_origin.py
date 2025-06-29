@@ -3,6 +3,7 @@ import os
 import time
 import random
 import json
+import csv
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import google.generativeai as genai
@@ -97,6 +98,12 @@ class NameOriginEnricher:
         # Get name description
         description = self._get_name_description(name, origin)
         enrichments['Name_Description'] = description
+        
+        # Get pronunciation difficulty assessments
+        pronunciation_data = self._get_pronunciation_difficulty(name, origin)
+        enrichments['Pronunciation_Spanish'] = pronunciation_data['spanish']
+        enrichments['Pronunciation_Foreign'] = pronunciation_data['foreign']
+        enrichments['Pronunciation_Explanation'] = pronunciation_data['explanation']
         
         # Future enrichments can be added here:
         # enrichments['Name_Popularity'] = self._get_name_popularity(name)
@@ -228,6 +235,91 @@ class NameOriginEnricher:
         except Exception as e:
             print(f"Error generating description for '{name}': {e}")
             return f"Nombre de origen {origin}."
+    
+    def _get_pronunciation_difficulty(self, name: str, origin: str) -> Dict[str, str]:
+        """
+        Evaluate pronunciation difficulty for Spanish speakers and foreigners
+        
+        Args:
+            name: The name to evaluate
+            origin: The origin of the name (for context)
+            
+        Returns:
+            Dictionary with 'spanish', 'foreign', and 'explanation' keys
+        """
+        try:
+            # Define difficulty levels
+            difficulty_levels = ["muy fácil", "fácil", "difícil", "muy difícil"]
+            
+            # Create structured output configuration for pronunciation assessment
+            pronunciation_config = {
+                "response_mime_type": "application/json",
+                "response_schema": {
+                    "type": "object",
+                    "properties": {
+                        "spanish": {
+                            "type": "string",
+                            "enum": difficulty_levels
+                        },
+                        "foreign": {
+                            "type": "string",
+                            "enum": difficulty_levels
+                        },
+                        "explanation": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["spanish", "foreign", "explanation"]
+                }
+            }
+            
+            prompt = f"""
+            Evalúa la dificultad de pronunciación del nombre "{name}" (origen: {origin}).
+            
+            Considera para ESPAÑOLES:
+            - Muy fácil: Solo fonemas españoles comunes (María, Carlos, Antonio)
+            - Fácil: Fonemas españoles con alguna combinación menos común (Xavier, Ainhoa)
+            - Difícil: Contiene fonemas no españoles pero adaptables (Jennifer, Kevin)
+            - Muy difícil: Fonemas muy ajenos al español (Txomin, Nguyen, Siobhan)
+            
+            Considera para EXTRANJEROS (hablantes de inglés principalmente):
+            - Muy fácil: Nombres internacionales o con fonética simple (Ana, David, Laura)
+            - Fácil: Pronunciación clara con pocas peculiaridades españolas (Carmen, Pablo)
+            - Difícil: Contiene sonidos específicos del español (rr, ñ, j española)
+            - Muy difícil: Múltiples sonidos difíciles o estructura compleja (Guillermo, Enrique)
+            
+            En la explicación (máximo 100 palabras):
+            - Identifica los sonidos problemáticos específicos
+            - Menciona si hay letras mudas o pronunciaciones no intuitivas
+            - Explica las diferencias entre la dificultad para españoles vs extranjeros
+            - Si es un nombre compuesto, evalúa ambas partes
+            
+            Responde con un JSON con las claves "spanish", "foreign" y "explanation".
+            """
+            
+            # Generate content with structured output
+            response = self.model.generate_content(
+                prompt,
+                generation_config=pronunciation_config
+            )
+            
+            # Parse JSON response
+            result = json.loads(response.text)
+            
+            # Ensure all required fields are present
+            return {
+                'spanish': result.get('spanish', 'fácil'),
+                'foreign': result.get('foreign', 'difícil'),
+                'explanation': result.get('explanation', 'Sin información de pronunciación disponible.')
+            }
+            
+        except Exception as e:
+            print(f"Error evaluating pronunciation for '{name}': {e}")
+            return {
+                'spanish': 'fácil',
+                'foreign': 'difícil',
+                'explanation': 'No se pudo evaluar la pronunciación de este nombre.'
+            }
 
     def enrich_names_file(self, input_file, output_file, max_names=None, delay=1, random_sample=False):
         """
@@ -243,7 +335,8 @@ class NameOriginEnricher:
         processed_count = 0
         
         # Define the new columns we'll be adding
-        new_columns = ['Family_Origin', 'Name_Description']
+        new_columns = ['Family_Origin', 'Name_Description', 'Pronunciation_Spanish', 
+                      'Pronunciation_Foreign', 'Pronunciation_Explanation']
         
         # First, read all rows if we need to do random sampling
         if random_sample and max_names:
@@ -276,6 +369,7 @@ class NameOriginEnricher:
                     processed_count += 1
                     print(f"Processed {processed_count}: {name}")
                     print(f"  - Origin: {enrichments['Family_Origin']}")
+                    print(f"  - Pronunciation: Spanish={enrichments['Pronunciation_Spanish']}, Foreign={enrichments['Pronunciation_Foreign']}")
                     print(f"  - Description: {enrichments['Name_Description'][:80]}...")
                     
                     # Add delay to respect API rate limits
@@ -311,6 +405,7 @@ class NameOriginEnricher:
                         processed_count += 1
                         print(f"Processed {processed_count}: {name}")
                         print(f"  - Origin: {enrichments['Family_Origin']}")
+                        print(f"  - Pronunciation: Spanish={enrichments['Pronunciation_Spanish']}, Foreign={enrichments['Pronunciation_Foreign']}")
                         print(f"  - Description: {enrichments['Name_Description'][:80]}...")
                         
                         # Add delay to respect API rate limits
@@ -350,6 +445,9 @@ class NameOriginEnricher:
             
             # Display results
             print(f"   Origen: {enrichments['Family_Origin']}")
+            print(f"   Pronunciación para españoles: {enrichments['Pronunciation_Spanish']}")
+            print(f"   Pronunciación para extranjeros: {enrichments['Pronunciation_Foreign']}")
+            print(f"   Explicación pronunciación: {enrichments['Pronunciation_Explanation']}")
             print(f"   Descripción:")
             
             # Word wrap the description for better display
