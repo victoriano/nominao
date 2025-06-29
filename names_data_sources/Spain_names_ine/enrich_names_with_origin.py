@@ -264,6 +264,36 @@ class NameOriginEnricher:
 def main():
     """Main function to run the name origin enrichment"""
     import sys
+    import argparse
+    
+    # Set up argument parser
+    parser = argparse.ArgumentParser(
+        description='Enrich Spanish names with etymological origin classification',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python enrich_names_with_origin.py                    # Process first 10 names sequentially
+  python enrich_names_with_origin.py --num 50          # Process first 50 names sequentially  
+  python enrich_names_with_origin.py --random 25       # Process 25 random names and save to file
+  python enrich_names_with_origin.py --test-random 5   # Quick test with 5 random names (no file)
+  python enrich_names_with_origin.py --all             # Process ALL names (may take hours!)
+        """
+    )
+    
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('--num', type=int, default=10,
+                      help='Number of names to process sequentially from the beginning (default: 10)')
+    group.add_argument('--random', type=int, metavar='N',
+                      help='Process N random names and save to file')
+    group.add_argument('--test-random', type=int, metavar='N', nargs='?', const=5,
+                      help='Quick test with N random names (no file output, default: 5)')
+    group.add_argument('--all', action='store_true',
+                      help='Process ALL names in the dataset (WARNING: may take hours!)')
+    
+    parser.add_argument('--delay', type=float, default=1.0,
+                       help='Delay between API calls in seconds (default: 1.0)')
+    
+    args = parser.parse_args()
     
     # Set up file paths
     script_dir = Path(__file__).parent
@@ -280,36 +310,51 @@ def main():
         # Initialize the enricher
         enricher = NameOriginEnricher()
         
-        # Check command line arguments
-        if len(sys.argv) > 1 and sys.argv[1] == '--test-random':
-            # Run quick test with random names
-            num_names = int(sys.argv[2]) if len(sys.argv) > 2 else 5
+        # Process based on arguments
+        if args.test_random is not None:
+            # Quick test with random names (no file output)
+            print(f"Running quick test with {args.test_random} random names...")
             enricher.test_random_names(
                 input_file=str(input_file),
-                num_names=num_names
+                num_names=args.test_random
             )
-        elif len(sys.argv) > 1 and sys.argv[1] == '--random':
+            
+        elif args.random is not None:
             # Process random sample and save to file
-            num_names = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+            print(f"Processing {args.random} random names and saving to file...")
             enricher.enrich_names_file(
                 input_file=str(input_file),
                 output_file=str(output_file_random),
-                max_names=num_names,
-                delay=1,
+                max_names=args.random,
+                delay=args.delay,
                 random_sample=True
             )
-        else:
-            # Default: Process sequentially (first N names)
+            
+        elif args.all:
+            # Process ALL names
+            print("Processing ALL names in the dataset...")
+            print("WARNING: This may take several hours!")
+            confirm = input("Are you sure you want to continue? (y/N): ")
+            if confirm.lower() != 'y':
+                print("Operation cancelled.")
+                return
+                
             enricher.enrich_names_file(
                 input_file=str(input_file),
                 output_file=str(output_file),
-                max_names=10,  # Remove this parameter to process all names
-                delay=1  # 1 second delay between API calls
+                max_names=None,  # Process all names
+                delay=args.delay
             )
             
-            print("\nTip: You can also run:")
-            print("  python enrich_names_with_origin.py --test-random [num_names]  # Quick test with random names")
-            print("  python enrich_names_with_origin.py --random [num_names]       # Process random sample to file")
+        else:
+            # Default: Process first N names sequentially
+            print(f"Processing first {args.num} names sequentially...")
+            enricher.enrich_names_file(
+                input_file=str(input_file),
+                output_file=str(output_file),
+                max_names=args.num,
+                delay=args.delay
+            )
         
     except Exception as e:
         print(f"Error: {e}")

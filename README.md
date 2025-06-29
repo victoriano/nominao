@@ -23,8 +23,11 @@ A data collection and processing tool for gathering name statistics from various
 │       ├── download_INE_names.py
 │       ├── process_INE_names.py
 │       ├── enrich_INE_names.py
+│       ├── enrich_names_with_origin.py  # AI origin classification
 │       └── output_data/    # Processed CSV files (tracked)
-│           └── names_frecuencia_edad_media.csv
+│           ├── names_frecuencia_edad_media.csv
+│           ├── names_with_origin.csv
+│           └── names_with_origin_random_sample.csv
 └── requirements.txt        # Project dependencies
 ```
 
@@ -85,6 +88,8 @@ uv run main.py --skip-download    # Skip download, use existing data
 
 ### Spanish INE Names Data
 
+#### Basic Data Processing
+
 **Option 1: Using uv from project root (recommended):**
 ```bash
 uv run names_data_sources/Spain_names_ine/main.py              # Complete pipeline
@@ -110,6 +115,143 @@ python main.py --skip-enrich      # Skip API enrichment (faster)
 - **Options:** Use `--skip-enrich` to skip API calls for faster execution
 - Outputs: `output_data/names_frecuencia_edad_media.csv` with comprehensive name statistics
 
+#### AI-Powered Origin Classification
+
+**NEW**: Advanced etymological origin classification for Spanish names using Google Gemini AI.
+
+**Setup Requirements:**
+```bash
+# Set your Gemini API key
+export GEMINI_API_KEY='your_api_key_here'
+
+# Run basic pipeline first to generate base data
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich
+```
+
+**Usage Options:**
+
+**Quick Test (No File Output):**
+```bash
+cd names_data_sources/Spain_names_ine
+
+# Test with 5 random names (default)
+uv run python enrich_names_with_origin.py --test-random
+
+# Test with specific number of random names
+uv run python enrich_names_with_origin.py --test-random 10
+```
+
+**Sequential Processing (First N Names):**
+```bash
+# Process first 10 names (default)
+uv run python enrich_names_with_origin.py
+
+# Process first 50 names
+uv run python enrich_names_with_origin.py --num 50
+
+# Process first 100 names
+uv run python enrich_names_with_origin.py --num 100
+```
+
+**Random Sampling (With File Output):**
+```bash
+# Process 25 random names and save to file
+uv run python enrich_names_with_origin.py --random 25
+
+# Process 100 random names and save to file
+uv run python enrich_names_with_origin.py --random 100
+```
+
+**Complete Processing:**
+```bash
+# Process ALL names (requires confirmation - may take hours!)
+uv run python enrich_names_with_origin.py --all
+```
+
+**Speed Control:**
+```bash
+# Use custom delay between API calls (default: 1.0 second)
+uv run python enrich_names_with_origin.py --num 20 --delay 0.5
+```
+
+**Help and Options:**
+```bash
+# View all available options
+uv run python enrich_names_with_origin.py --help
+```
+
+#### Origin Categories (35 Total)
+
+**Main Categories:**
+- **Español**: Spanish names, including castellanized and culturally assimilated names (Hebrew/Biblical, Latin)
+- **Anglosajón**: Anglo-Saxon, Celtic, English, Irish, Scottish, Welsh origins  
+- **Alemán**: German names in their original form
+- **Francés**: French, Breton, Provençal, Occitan origins
+- **Italiano**: Italian names
+- **Árabe**: Arabic, Berber, North African origins
+- **Eslavo**: Slavic origins (Russian, Polish, Ukrainian, etc.)
+- **Catalán**: Catalan names
+- **Gallego**: Galician names  
+- **Vasco**: Basque/Euskera names
+
+**Other Origins:**
+- Escandinavo, Griego, Portugués, Sánscrito, Chino, Japonés, Coreano
+- Armenio, Georgiano, Húngaro, Turco, Persa, Egipcio, Arameo
+- Nativo Americano, Latinoamericano, Africano, Hawaiano
+- Contemporáneo, Guanche, and more
+
+#### Smart Classification Features
+
+**Cultural Classification:**
+Names are classified by their **current Spanish form**, not historical etymology:
+- "Guillermo" → Español (not Alemán)
+- "Carlos" → Español (not Alemán)  
+- "Wilhelm" → Alemán
+- "Karl" → Alemán
+
+**Compound Name Rules:**
+1. **Anglo-Spanish Mix** → Latinoamericano
+   - "Brandon José" → Latinoamericano
+   - "Jennifer María" → Latinoamericano
+
+2. **Other Compounds** → Most distant from Spanish/Latin
+   - "María Aitor" → Vasco (by Aitor)
+   - "Juan Chen" → Chino (by Chen)
+
+**Hebrew/Biblical and Latin Assimilation:**
+Names of Hebrew/Biblical and Latin origin are classified as Spanish due to cultural assimilation:
+- "María", "José", "Carmen", "Antonio" → Español
+
+#### Output Files
+
+**Sequential Processing:**
+- `output_data/names_with_origin.csv`: Names processed sequentially from the beginning
+
+**Random Sampling:**
+- `output_data/names_with_origin_random_sample.csv`: Randomly sampled names
+
+**File Format:**
+Each output file contains all original columns plus:
+- `Family_Origin`: The classified etymological origin
+
+#### Classification Examples
+
+```bash
+# Quick examples of how the AI classifies names:
+
+# Cultural classification (current form vs etymology)
+"Guillermo" → Español    # (not Alemán - castellanized)
+"Wilhelm" → Alemán       # (original German form)
+
+# Compound name handling  
+"Brandon José" → Latinoamericano    # (Anglo + Spanish mix)
+"María Aitor" → Vasco              # (most distant from Spanish)
+
+# Biblical/Latin assimilation
+"José" → Español         # (culturally Spanish despite Hebrew origin)
+"Antonio" → Español      # (culturally Spanish despite Latin origin)
+```
+
 ### Pipeline Features
 
 Both pipelines include:
@@ -128,6 +270,8 @@ Key dependencies include:
 - `nltk` - Natural language processing (for Spanish analysis)
 - `beautifulsoup4` - HTML parsing
 - `tqdm` - Progress bars
+- `google-generativeai` - Gemini AI for origin classification (Spanish names)
+- `python-dotenv` - Environment variable management
 
 ## Data Sources Attribution
 
