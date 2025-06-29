@@ -46,6 +46,15 @@ source .venv/bin/activate  # On Unix/macOS
 uv pip install -r requirements.txt
 ```
 
+3. (Optional) Set up Gemini API key for Spanish names origin classification:
+```bash
+export GEMINI_API_KEY='your_api_key_here'  # Unix/macOS
+# or
+set GEMINI_API_KEY=your_api_key_here       # Windows
+```
+
+Get your API key from: https://makersuite.google.com/app/apikey
+
 ## Quick Start (Recommended)
 
 Run these commands from the project root for the fastest setup:
@@ -53,6 +62,10 @@ Run these commands from the project root for the fastest setup:
 ```bash
 # Spanish pipeline (skip API enrichment for speed)
 uv run names_data_sources/Spain_names_ine/main.py --skip-enrich
+
+# Spanish pipeline with AI origin classification (requires Gemini API key)
+export GEMINI_API_KEY='your_key_here'
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 50
 
 # USA pipeline (convert existing data to parquet)
 uv run names_data_sources/USA_names_ssa/main.py --convert-only
@@ -104,6 +117,99 @@ python main.py                    # Runs complete pipeline (including enrichment
 python main.py --skip-enrich      # Skip API enrichment (faster)
 ```
 
+#### Integrated Pipeline with AI Origin Classification
+
+**NEW**: Run the complete pipeline including AI-powered origin classification in one command!
+
+##### Quick Examples
+
+```bash
+# Basic usage with origin classification (100 names by default)
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins
+
+# Random sample of 50 names with classification
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 50
+
+# Sequential processing with custom output
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-count 200 --origin-output my_classified_names.csv
+
+# Full pipeline with all processing stages (including INE enrichment and origin classification)
+export GEMINI_API_KEY='your_key_here'
+uv run names_data_sources/Spain_names_ine/main.py --classify-origins --origin-mode random --origin-count 100
+```
+
+##### Pipeline Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--classify-origins` | Enable AI origin classification after base processing | False |
+| `--origin-mode` | Classification mode: `sequential`, `random`, or `all` | sequential |
+| `--origin-count` | Number of names to classify (ignored if mode is `all`) | 100 |
+| `--origin-output` | Custom output file path for classification results | Auto-generated |
+| `--gemini-key` | Gemini API key (alternative to GEMINI_API_KEY env var) | None |
+
+##### Common Use Cases
+
+**1. Quick Testing (5-10 random names):**
+```bash
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 5
+```
+
+**2. Statistical Sample (1000 random names):**
+```bash
+export GEMINI_API_KEY='your_key_here'
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 1000 --origin-output statistical_sample.csv
+```
+
+**3. Production Processing (First 10,000 names):**
+```bash
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-count 10000 --origin-output production_batch.csv
+```
+
+**4. Complete Dataset (WARNING: May take hours!):**
+```bash
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode all
+```
+
+##### Output Files Generated
+
+The integrated pipeline generates multiple files:
+
+1. **Base Processing Output:**
+   - `output_data/names_frecuencia_edad_media.csv` - Enriched with all metadata columns
+
+2. **Origin Classification Output:**
+   - Sequential mode: `output_data/names_with_origin.csv`
+   - Random mode: `output_data/names_with_origin_random_sample.csv`
+   - Custom: Your specified filename via `--origin-output`
+
+Each classified file contains all original columns PLUS:
+- `Family_Origin`: The AI-classified etymological origin (35 categories)
+
+##### Pipeline Integration Benefits
+
+**Traditional Approach (Multiple Commands):**
+```bash
+# Step 1: Download and process
+cd names_data_sources/Spain_names_ine
+uv run python download_INE_names.py
+uv run python process_INE_names.py
+
+# Step 2: Optional enrichment
+uv run python enrich_INE_names.py  # or skip this
+
+# Step 3: Origin classification
+export GEMINI_API_KEY='your_key'
+uv run python enrich_names_with_origin.py --random 100
+```
+
+**Integrated Pipeline (Single Command):**
+```bash
+# All steps in one command!
+export GEMINI_API_KEY='your_key'
+uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 100
+```
+
 **What it does:**
 - Downloads names data from INE (Instituto Nacional de Estadística)
 - Processes data to add analysis columns:
@@ -115,9 +221,11 @@ python main.py --skip-enrich      # Skip API enrichment (faster)
 - **Options:** Use `--skip-enrich` to skip API calls for faster execution
 - Outputs: `output_data/names_frecuencia_edad_media.csv` with comprehensive name statistics
 
-#### AI-Powered Origin Classification
+#### AI-Powered Origin Classification (Standalone)
 
 **NEW**: Advanced etymological origin classification for Spanish names using Google Gemini AI.
+
+> **Note**: This section covers standalone usage. For integrated pipeline usage, see [Integrated Pipeline with AI Origin Classification](#integrated-pipeline-with-ai-origin-classification) below.
 
 **Setup Requirements:**
 ```bash

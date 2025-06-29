@@ -1,0 +1,6 @@
+Nombre,Frecuencia,Edad Media (*),Gender,Percentage,Popularity,Is_Compound,Character_Count,Syllable_Count,Family_Origin
+ELENA STEFANIA,34,24.6,Female,0.0001534459653797,17254,True,14,6,Italiano
+ALBA MANUELA,38,19.6,Female,0.000171498431895,15529,True,12,5,Español
+JIANYING,122,47.0,Female,0.0005506002287157,5956,False,8,2,Chino
+ZUBAIR,166,33.7,Male,0.0007657591621007,4868,False,6,2,Árabe
+ERWAN,29,29.8,Male,0.0001337772030176,19876,False,5,2,Francés
