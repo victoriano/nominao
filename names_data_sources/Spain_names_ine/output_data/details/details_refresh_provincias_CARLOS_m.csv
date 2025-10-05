@@ -1,0 +1,54 @@
+nombre_id,nombre,gender,region_id,region_name,percentage,unidad,persons,region_type,parent_region_name
+CARLOS-m,CARLOS,Male,2,Araba/Álava,8.19,‰,1365,provincia,Araba/Álava
+CARLOS-m,CARLOS,Male,3,Albacete,13.463,‰,2622,provincia,Albacete
+CARLOS-m,CARLOS,Male,4,Alicante/Alacant,10.097,‰,9943,provincia,Alicante/Alacant
+CARLOS-m,CARLOS,Male,5,Almería,5.739,‰,2233,provincia,Almería
+CARLOS-m,CARLOS,Male,6,Ávila,15.919,‰,1283,provincia,Ávila
+CARLOS-m,CARLOS,Male,7,Badajoz,13.553,‰,4458,provincia,Badajoz
+CARLOS-m,CARLOS,Male,8,"Balears, Illes",8.918,‰,,provincia,"Balears, Illes"
+CARLOS-m,CARLOS,Male,9,Barcelona,11.795,‰,33860,provincia,Barcelona
+CARLOS-m,CARLOS,Male,10,Burgos,13.925,‰,2504,provincia,Burgos
+CARLOS-m,CARLOS,Male,11,Cáceres,13.541,‰,2610,provincia,Cáceres
+CARLOS-m,CARLOS,Male,12,Cádiz,8.322,‰,5156,provincia,Cádiz
+CARLOS-m,CARLOS,Male,13,Castellón/Castelló,13.92,‰,4254,provincia,Castellón/Castelló
+CARLOS-m,CARLOS,Male,14,Ciudad Real,14.687,‰,,provincia,Ciudad Real
+CARLOS-m,CARLOS,Male,15,Córdoba,9.418,‰,3566,provincia,Córdoba
+CARLOS-m,CARLOS,Male,16,"Coruña, A",13.139,‰,,provincia,"Coruña, A"
+CARLOS-m,CARLOS,Male,17,Cuenca,14.049,‰,1410,provincia,Cuenca
+CARLOS-m,CARLOS,Male,18,Girona,7.563,‰,3111,provincia,Girona
+CARLOS-m,CARLOS,Male,19,Granada,8.638,‰,3995,provincia,Granada
+CARLOS-m,CARLOS,Male,20,Guadalajara,15.074,‰,2141,provincia,Guadalajara
+CARLOS-m,CARLOS,Male,21,Gipuzkoa,5.38,‰,1917,provincia,Gipuzkoa
+CARLOS-m,CARLOS,Male,22,Huelva,8.33,‰,2213,provincia,Huelva
+CARLOS-m,CARLOS,Male,23,Huesca,16.975,‰,1969,provincia,Huesca
+CARLOS-m,CARLOS,Male,24,Jaén,8.138,‰,2494,provincia,Jaén
+CARLOS-m,CARLOS,Male,25,León,13.07,‰,2847,provincia,León
+CARLOS-m,CARLOS,Male,26,Lleida,7.565,‰,1748,provincia,Lleida
+CARLOS-m,CARLOS,Male,27,"Rioja, La",12.533,‰,,provincia,"Rioja, La"
+CARLOS-m,CARLOS,Male,28,Lugo,15.306,‰,2414,provincia,Lugo
+CARLOS-m,CARLOS,Male,29,Madrid,16.058,‰,53893,provincia,Madrid
+CARLOS-m,CARLOS,Male,30,Málaga,9.101,‰,7892,provincia,Málaga
+CARLOS-m,CARLOS,Male,31,Murcia,6.207,‰,4879,provincia,Murcia
+CARLOS-m,CARLOS,Male,32,Navarra,9.949,‰,3342,provincia,Navarra
+CARLOS-m,CARLOS,Male,33,Asturias,11.236,‰,5410,provincia,Asturias
+CARLOS-m,CARLOS,Male,34,Palencia,14.066,‰,1102,provincia,Palencia
+CARLOS-m,CARLOS,Male,35,"Palmas, Las",7.013,‰,,provincia,"Palmas, Las"
+CARLOS-m,CARLOS,Male,36,Pontevedra,14.027,‰,6415,provincia,Pontevedra
+CARLOS-m,CARLOS,Male,37,Salamanca,13.699,‰,2174,provincia,Salamanca
+CARLOS-m,CARLOS,Male,38,Santa Cruz de Tenerife,6.516,‰,,provincia,Santa Cruz de Tenerife
+CARLOS-m,CARLOS,Male,39,Cantabria,12.538,‰,3590,provincia,Cantabria
+CARLOS-m,CARLOS,Male,40,Segovia,15.527,‰,1219,provincia,Segovia
+CARLOS-m,CARLOS,Male,41,Sevilla,10.675,‰,10251,provincia,Sevilla
+CARLOS-m,CARLOS,Male,42,Soria,15.197,‰,695,provincia,Soria
+CARLOS-m,CARLOS,Male,43,Tarragona,9.027,‰,3887,provincia,Tarragona
+CARLOS-m,CARLOS,Male,44,Teruel,16.759,‰,1150,provincia,Teruel
+CARLOS-m,CARLOS,Male,45,Toledo,14.523,‰,5426,provincia,Toledo
+CARLOS-m,CARLOS,Male,46,Valencia/València,14.146,‰,18750,provincia,Valencia/València
+CARLOS-m,CARLOS,Male,47,Valladolid,15.536,‰,3970,provincia,Valladolid
+CARLOS-m,CARLOS,Male,48,Bizkaia,6.71,‰,3761,provincia,Bizkaia
+CARLOS-m,CARLOS,Male,49,Zamora,12.578,‰,1037,provincia,Zamora
+CARLOS-m,CARLOS,Male,50,Zaragoza,15.277,‰,7389,provincia,Zaragoza
+CARLOS-m,CARLOS,Male,51,Ceuta,6.554,‰,275,provincia,Ceuta
+CARLOS-m,CARLOS,Male,52,Melilla,7.214,‰,312,provincia,Melilla
+CARLOS-m,CARLOS,Male,53,Ourense,12.758,‰,1865,provincia,Ourense
+CARLOS-m,CARLOS,Male,16473,Desconocido,11.519,‰,,provincia,Desconocido

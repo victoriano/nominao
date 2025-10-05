@@ -1,0 +1,442 @@
+nombre_id,nombre,gender,region_id,region_name,percentage,unidad,persons,region_type
+VICTORIANO-m,VICTORIANO,Male,484,Logroño,0.561,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,485,Málaga,0.327,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,486,Ourense,0.253,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,487,Pontevedra,0.458,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,488,Salamanca,1.106,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,489,Santander,0.688,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,490,Soria,0.573,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,491,Tarragona,0.247,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,492,Teruel,0.634,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,493,Valencia,0.309,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,494,Zaragoza,0.314,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,495,Valladolid,0.555,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,541,Utebo,0.53,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,559,Albacete,0.294,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,560,Almería,0.255,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,561,Ávila,0.604,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,562,Badajoz,1.066,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,563,Barcelona,0.228,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,564,Burgos,0.464,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,565,Ciudad Real,0.865,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,566,Cuenca,0.748,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,567,Girona,0.292,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,568,Granada,0.371,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,569,León,0.466,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,570,Lugo,0.457,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,571,Vitoria-Gasteiz,0.575,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,572,Donostia/San Sebastián,0.381,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,638,Zamora,0.943,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,697,"Zarza, La",4.142,‰,46,municipio
+VICTORIANO-m,VICTORIANO,Male,707,Etxebarri,0.838,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,785,Sagunto/Sagunt,0.486,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,795,Utiel,0.861,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,833,Laguna de Duero,0.618,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,876,"Puebla de Montalbán, La",1.475,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,887,Talavera de la Reina,0.685,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,888,Toledo,0.487,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,929,Bétera,0.582,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,932,Burjassot,0.709,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,1133,Real Sitio de San Ildefonso,1.966,‰,22,municipio
+VICTORIANO-m,VICTORIANO,Male,1150,Dos Hermanas,0.175,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,1155,Huévar del Aljarafe,3.474,‰,39,municipio
+VICTORIANO-m,VICTORIANO,Male,1167,"Rinconada, La",0.451,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,1172,Utrera,0.349,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1176,"Viso del Alcor, El",0.626,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1235,Camargo,0.471,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,1354,Santa Marta de Tormes,0.703,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,1391,Arona,0.158,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,1398,Icod de los Vinos,0.5,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,1400,"Orotava, La",0.91,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,1402,"Realejos, Los",0.323,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1406,Santa Úrsula,0.666,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1407,"Sauzal, El",1.735,‰,19,municipio
+VICTORIANO-m,VICTORIANO,Male,1408,Tacoronte,0.486,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,1412,Baztan,1.759,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,1422,Burlada/Burlata,0.69,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,1432,"Oliva, La",0.587,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1433,"Palmas de Gran Canaria, Las",0.281,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,1434,San Bartolomé de Tirajana,0.313,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1435,Santa Lucía de Tirajana,0.619,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1438,Alba de Tormes,2.323,‰,26,municipio
+VICTORIANO-m,VICTORIANO,Male,1477,Ciudad Rodrigo,2.117,‰,24,municipio
+VICTORIANO-m,VICTORIANO,Male,1524,Oviedo,0.353,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1608,Roquetas de Mar,0.32,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1631,Tarazona de la Mancha,2.855,‰,32,municipio
+VICTORIANO-m,VICTORIANO,Male,1648,Benidorm,0.459,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,1714,Castuera,2.183,‰,25,municipio
+VICTORIANO-m,VICTORIANO,Male,1717,Don Benito,0.538,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,1721,Fuente de Cantos,2.628,‰,29,municipio
+VICTORIANO-m,VICTORIANO,Male,1722,Fuente del Maestre,1.525,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,1736,"Hoyo de Pinares, El",4.413,‰,50,municipio
+VICTORIANO-m,VICTORIANO,Male,1762,San Vicente del Raspeig/Sant Vicent del Raspeig,0.502,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,1779,Carboneras,1.154,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,1786,Huércal de Almería,0.636,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1790,Níjar,0.314,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1796,"Hospitalet de Llobregat, L'",0.451,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,1803,Masquefa,1.18,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,1804,Mataró,0.293,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,1805,Molins de Rei,0.611,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,1837,Zalamea de la Serena,4.614,‰,52,municipio
+VICTORIANO-m,VICTORIANO,Male,1841,Calvià,0.223,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,1851,Marratxí,0.348,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1853,Palma de Mallorca,0.252,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,1922,Sant Pere de Ribes,0.38,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1929,Santa Coloma de Gramenet,0.335,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1932,Barberà del Vallès,0.364,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,1939,Cerdanyola del Vallès,0.499,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,1963,Cubelles,0.574,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,1965,Esplugues de Llobregat,0.221,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,1968,"Franqueses del Vallès, Les",0.576,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2092,Vila-real,0.499,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2097,Alcázar de San Juan,0.524,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2101,Almodóvar del Campo,3.137,‰,35,municipio
+VICTORIANO-m,VICTORIANO,Male,2113,Trujillo,1.43,‰,16,municipio
+VICTORIANO-m,VICTORIANO,Male,2126,Algeciras,0.422,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2127,Arcos de la Frontera,0.452,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2132,Jerez de la Frontera,0.191,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,2133,"Línea de la Concepción, La",0.281,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2135,"Puerto de Santa María, El",0.339,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2136,Sanlúcar de Barrameda,0.288,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2140,Acehúche,12.225,‰,137,municipio
+VICTORIANO-m,VICTORIANO,Male,2204,Valdepeñas,2.214,‰,25,municipio
+VICTORIANO-m,VICTORIANO,Male,2230,Peñarroya-Pueblonuevo,1.211,‰,14,municipio
+VICTORIANO-m,VICTORIANO,Male,2248,"Alcázares, Los",0.507,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2254,Monachil,1.379,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,2291,Sant Feliu de Guíxols,0.622,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,2341,Yecla,0.332,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2366,Beasain,0.72,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,2390,Guadalajara,0.457,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2428,Lorquí,3.046,‰,34,municipio
+VICTORIANO-m,VICTORIANO,Male,2430,Molina de Segura,0.417,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2433,Murcia,0.29,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2440,Torre-Pacheco,1.598,‰,18,municipio
+VICTORIANO-m,VICTORIANO,Male,2442,Totana,0.395,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2480,Gibraleón,1.499,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,2483,Isla Cristina,0.459,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2526,Alcantarilla,0.232,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2529,Alhama de Murcia,0.418,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2537,Cartagena,0.541,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2542,Fuente Álamo de Murcia,0.508,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2543,Jumilla,0.567,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2545,Lorca,0.241,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2632,Vélez-Málaga,0.396,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2639,Torremolinos,0.335,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2642,Águilas,0.324,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2662,Nájera,2.709,‰,30,municipio
+VICTORIANO-m,VICTORIANO,Male,2740,Valdemorillo,0.708,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,2750,Villarejo de Salvanés,2.312,‰,26,municipio
+VICTORIANO-m,VICTORIANO,Male,2758,Antequera,0.246,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2771,Cómpeta,4.978,‰,56,municipio
+VICTORIANO-m,VICTORIANO,Male,2784,Alcobendas,0.656,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,2787,Aranjuez,0.459,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2788,Arroyomolinos,0.487,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2799,Ciempozuelos,0.613,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,2801,Colmenar Viejo,0.784,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,2802,Collado Villalba,0.429,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2813,Madrid,0.445,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2814,Majadahonda,0.316,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2816,Mejorada del Campo,0.409,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2819,Móstoles,0.736,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,2822,Marbella,0.237,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2834,Rincón de la Victoria,0.276,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2836,Ronda,0.491,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2840,Navalcarnero,0.924,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,2847,Parla,0.464,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,2854,Pinto,0.545,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2856,Pozuelo de Alarcón,0.235,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2864,Rivas-Vaciamadrid,0.319,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,2868,"Rozas de Madrid, Las",0.104,‰,1,municipio
+VICTORIANO-m,VICTORIANO,Male,2871,San Fernando de Henares,0.635,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,2874,San Martín de Valdeiglesias,1.104,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,2875,San Sebastián de los Reyes,0.61,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,2887,Torrejón de Ardoz,0.549,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,2892,Torres de la Alameda,1.761,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,2896,Valdemoro,0.268,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2906,Villaviciosa de Odón,0.851,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,2921,Arenas,10.401,‰,117,municipio
+VICTORIANO-m,VICTORIANO,Male,2924,Benalmádena,0.262,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,2939,Estepona,0.183,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,2941,Fuengirola,0.121,‰,1,municipio
+VICTORIANO-m,VICTORIANO,Male,2996,Monforte de Lemos,0.568,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3032,"Álamo, El",0.971,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,3033,Alcalá de Henares,0.695,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,3034,Alcorcón,0.717,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,3038,Arganda del Rey,0.542,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3042,Boadilla del Monte,0.28,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,3058,Coslada,0.942,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,3063,Fuenlabrada,0.881,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,3065,Galapagar,0.855,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,3067,Getafe,0.664,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,3069,Guadalix de la Sierra,1.433,‰,16,municipio
+VICTORIANO-m,VICTORIANO,Male,3073,Humanes de Madrid,0.502,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3074,Leganés,0.675,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,3109,Alfaro,1.011,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,3131,Calahorra,0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,3275,Lleida,0.18,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,3363,Ponferrada,0.505,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3381,Roperuelos del Páramo,23.715,‰,266,municipio
+VICTORIANO-m,VICTORIANO,Male,3385,San Andrés del Rabanedo,0.352,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,3432,Villaquilambre,0.541,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3493,Jaén,0.316,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,3496,Jódar,0.882,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,3498,Linares,0.554,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3503,Martos,0.576,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3651,Huesca,0.229,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,3720,Alcalá la Real,1.786,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,3724,Arquillos,5.869,‰,66,municipio
+VICTORIANO-m,VICTORIANO,Male,3730,Eibar,0.451,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,3736,Hondarribia,0.715,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,3740,Hernani,0.504,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3745,Irun,0.452,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,3755,Arrasate/Mondragón,0.923,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,3767,Errenteria,0.527,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3773,Bergara,0.84,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,3778,Zarautz,0.971,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,3780,Zumaia,0.981,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,3782,Lasarte-Oria,0.54,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3789,Aljaraque,0.534,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3792,Almonte,0.805,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,3822,Huelva,0.494,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,3824,Lepe,0.656,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,3829,Palos de la Frontera,0.76,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,3832,Punta Umbría,0.612,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,3983,Azpeitia,0.925,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,4048,Azuqueca de Henares,0.278,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,4178,Almuñécar,0.582,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,4224,Iznalloz,3.429,‰,38,municipio
+VICTORIANO-m,VICTORIANO,Male,4231,Loja,1.448,‰,16,municipio
+VICTORIANO-m,VICTORIANO,Male,4245,Pedro Martínez,19.264,‰,216,municipio
+VICTORIANO-m,VICTORIANO,Male,4255,Santa Fe,0.669,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,4272,Blanes,0.336,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,4283,Calonge,0.821,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,4312,Figueres,0.249,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,4339,Lloret de Mar,0.236,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,4372,Salt,0.501,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,4400,Horcajo de Santiago,2.564,‰,29,municipio
+VICTORIANO-m,VICTORIANO,Male,4467,Tarancón,0.725,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,4534,"Coruña, A",0.208,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,4540,Ferrol,0.526,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,4562,Oleiros,0.272,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,4581,Santiago de Compostela,0.455,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4640,Argamasilla de Alba,2.018,‰,23,municipio
+VICTORIANO-m,VICTORIANO,Male,4641,Argamasilla de Calatrava,2.394,‰,27,municipio
+VICTORIANO-m,VICTORIANO,Male,4645,Brazatortas,11.321,‰,127,municipio
+VICTORIANO-m,VICTORIANO,Male,4649,Campo de Criptana,1.694,‰,19,municipio
+VICTORIANO-m,VICTORIANO,Male,4659,Daimiel,2.019,‰,23,municipio
+VICTORIANO-m,VICTORIANO,Male,4667,Herencia,3.018,‰,34,municipio
+VICTORIANO-m,VICTORIANO,Male,4672,Malagón,1.286,‰,14,municipio
+VICTORIANO-m,VICTORIANO,Male,4673,Manzanares,0.57,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,4676,Miguelturra,1.384,‰,16,municipio
+VICTORIANO-m,VICTORIANO,Male,4691,Puertollano,1.924,‰,22,municipio
+VICTORIANO-m,VICTORIANO,Male,4698,"Solana, La",4.238,‰,48,municipio
+VICTORIANO-m,VICTORIANO,Male,4700,Tomelloso,1.251,‰,14,municipio
+VICTORIANO-m,VICTORIANO,Male,4716,Baena,1.529,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,4725,Córdoba,0.436,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4727,Espejo,4.419,‰,50,municipio
+VICTORIANO-m,VICTORIANO,Male,4730,Fuente Obejuna,2.219,‰,25,municipio
+VICTORIANO-m,VICTORIANO,Male,4738,Montilla,0.727,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,4744,Pozoblanco,0.608,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,4758,Ames,0.318,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,4773,"Alcora, l'",0.944,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,4797,Borriana/Burriana,0.438,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4803,Castellón de la Plana/Castelló de la Plana,0.184,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,4839,Onda,0.542,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,4862,"Vall d'Uixó, la",0.511,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,4869,Vinaròs,0.402,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4879,Almadén,2.96,‰,33,municipio
+VICTORIANO-m,VICTORIANO,Male,4902,Miajadas,1.719,‰,19,municipio
+VICTORIANO-m,VICTORIANO,Male,4908,Montehermoso,3.156,‰,35,municipio
+VICTORIANO-m,VICTORIANO,Male,4909,Moraleja,2.455,‰,28,municipio
+VICTORIANO-m,VICTORIANO,Male,4911,Navaconcejo,4.869,‰,55,municipio
+VICTORIANO-m,VICTORIANO,Male,4912,Navalmoral de la Mata,1.333,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,4929,Plasencia,1.299,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,4950,Serradilla,6.702,‰,75,municipio
+VICTORIANO-m,VICTORIANO,Male,4980,Barbate,0.618,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,4981,"Barrios, Los",0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4983,Cádiz,0.382,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,4985,Chipiona,0.905,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,4993,Puerto Real,0.38,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,4996,San Fernando,0.416,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,4997,San Roque,0.348,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5075,Cáceres,0.823,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,5091,Coria,1.337,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,5120,Miranda de Ebro,1.179,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,5235,Aranda de Duero,0.552,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,5341,Pineda de Mar,0.481,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,5347,"Prat de Llobregat, El",0.682,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,5357,Ripollet,0.564,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,5361,Rubí,0.199,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5363,Sabadell,0.195,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5370,Sant Adrià de Besòs,0.263,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,5376,Sant Boi de Llobregat,0.9,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,5387,Sant Feliu de Llobregat,0.356,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5416,Sant Vicenç dels Horts,0.352,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5426,Terrassa,0.152,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5439,Viladecans,0.604,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,5441,Vilafranca del Penedès,0.296,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,5442,Vilanova i la Geltrú,0.324,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5471,Badalona,0.315,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5498,Canyelles,2.855,‰,32,municipio
+VICTORIANO-m,VICTORIANO,Male,5506,Castellar del Vallès,0.401,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,5511,Castelldefels,0.237,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,5523,Cornellà de Llobregat,0.363,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5533,Gavà,0.344,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5537,Granollers,0.19,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5540,Igualada,0.388,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5543,"Llagosta, La",1.085,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,5546,Malgrat de Mar,0.739,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,5553,Mollet del Vallès,0.391,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5568,Olesa de Montserrat,0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,5576,Piera,0.552,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,5578,Guareña,1.51,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,5579,"Haba, La",16.502,‰,185,municipio
+VICTORIANO-m,VICTORIANO,Male,5600,Mérida,0.894,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,5602,Monesterio,2.33,‰,26,municipio
+VICTORIANO-m,VICTORIANO,Male,5610,Oliva de la Frontera,4.042,‰,45,municipio
+VICTORIANO-m,VICTORIANO,Male,5612,Olivenza,1.375,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,5620,Puebla de la Calzada,1.7,‰,19,municipio
+VICTORIANO-m,VICTORIANO,Male,5624,Puebla de Obando,7.634,‰,86,municipio
+VICTORIANO-m,VICTORIANO,Male,5626,Quintana de la Serena,10.155,‰,114,municipio
+VICTORIANO-m,VICTORIANO,Male,5630,Ribera del Fresno,3.137,‰,35,municipio
+VICTORIANO-m,VICTORIANO,Male,5633,Salvaleón,5.974,‰,67,municipio
+VICTORIANO-m,VICTORIANO,Male,5653,Villanueva de la Serena,1.12,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,5656,Zafra,0.877,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,5675,Eivissa,0.524,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,5676,Inca,0.449,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,5679,Llucmajor,0.398,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5685,Pollença,0.687,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,5777,Aceuchal,2.608,‰,29,municipio
+VICTORIANO-m,VICTORIANO,Male,5779,Alburquerque,3.197,‰,36,municipio
+VICTORIANO-m,VICTORIANO,Male,5782,Almendralejo,1.3,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,5784,Azuaga,7.949,‰,89,municipio
+VICTORIANO-m,VICTORIANO,Male,5786,Berlanga,6.323,‰,71,municipio
+VICTORIANO-m,VICTORIANO,Male,5788,Burguillos del Cerro,4.096,‰,46,municipio
+VICTORIANO-m,VICTORIANO,Male,5790,Calamonte,2.614,‰,29,municipio
+VICTORIANO-m,VICTORIANO,Male,5805,Fuenlabrada de los Montes,7.151,‰,80,municipio
+VICTORIANO-m,VICTORIANO,Male,5807,Fuentes de León,4.69,‰,53,municipio
+VICTORIANO-m,VICTORIANO,Male,5823,Vícar,0.391,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5826,"Ejido, El",0.192,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5836,Arenas de San Pedro,1.591,‰,18,municipio
+VICTORIANO-m,VICTORIANO,Male,5838,Arévalo,1.307,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,5951,Crevillent,0.39,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,5955,Dénia,0.218,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,5957,Elche/Elx,0.442,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,5958,Elda,0.228,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,5971,Ibi,0.993,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,5990,Orihuela,0.146,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,6020,Torrevieja,0.301,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,6025,Villena,0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,6027,Pilar de la Horadada,0.737,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,6081,Amurrio,1.363,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,6103,Laudio/Llodio,0.574,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,6131,Almansa,1.078,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,6143,Casas de Juan Núñez,6.821,‰,77,municipio
+VICTORIANO-m,VICTORIANO,Male,6146,Casas-Ibáñez,2.161,‰,24,municipio
+VICTORIANO-m,VICTORIANO,Male,6179,Villarrobledo,0.482,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,6188,Alcoy/Alcoi,0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,6191,Alicante/Alacant,0.312,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6208,Pamplona/Iruña,0.315,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6237,Tudela,0.264,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,6325,Avilés,0.701,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,6338,Gijón,0.307,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,6371,Siero,0.312,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6498,Agüimes,0.299,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,6499,Arrecife,0.147,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,6500,Arucas,0.415,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,6501,Firgas,1.529,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,6502,Gáldar,0.806,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,6503,Ingenio,0.486,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,6505,Puerto del Rosario,0.399,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6511,Telde,0.374,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6545,Marín,0.59,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,6559,Poio,0.934,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,6563,Redondela,0.783,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,6569,Sanxenxo,0.677,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,6573,Tui,0.933,‰,10,municipio
+VICTORIANO-m,VICTORIANO,Male,6575,Vigo,0.374,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6578,Vilagarcía de Arousa,0.719,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,6607,Béjar,2.473,‰,28,municipio
+VICTORIANO-m,VICTORIANO,Male,6675,Martín de Yeltes,25.126,‰,282,municipio
+VICTORIANO-m,VICTORIANO,Male,6727,Peñaranda de Bracamonte,3.338,‰,37,municipio
+VICTORIANO-m,VICTORIANO,Male,6817,Granadilla de Abona,0.209,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,6819,Güímar,0.558,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,6820,"Matanza de Acentejo, La",2.185,‰,25,municipio
+VICTORIANO-m,VICTORIANO,Male,6824,"Rosario, El",0.548,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,6827,Santa Cruz de Tenerife,0.23,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,6842,Cabezón de la Sal,1.254,‰,14,municipio
+VICTORIANO-m,VICTORIANO,Male,6859,Laredo,1.175,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,6864,Marina de Cudeyo,2.315,‰,26,municipio
+VICTORIANO-m,VICTORIANO,Male,6866,Medio Cudeyo,1.621,‰,18,municipio
+VICTORIANO-m,VICTORIANO,Male,6876,Piélagos,0.377,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,6884,Reocín,1.922,‰,22,municipio
+VICTORIANO-m,VICTORIANO,Male,6902,Santoña,0.937,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,6908,Torrelavega,0.619,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,7013,Segovia,0.79,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,7053,Alcalá de Guadaíra,0.157,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,7069,Camas,0.495,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,7077,Coria del Río,0.325,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7089,Lebrija,0.797,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,7092,Mairena del Aljarafe,0.301,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,7096,Olivares,1.258,‰,14,municipio
+VICTORIANO-m,VICTORIANO,Male,7098,"Palacios y Villafranca, Los",0.363,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7112,Sevilla,0.319,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7130,Almazán,1.782,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,7319,Reus,0.374,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7338,Valls,0.394,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7339,"Vendrell, El",0.498,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,7540,Carranque,1.797,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,7549,Corral de Almaguer,1.775,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,7558,Fuensalida,1.12,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,7573,Illescas,0.683,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,7598,Mora,1.784,‰,20,municipio
+VICTORIANO-m,VICTORIANO,Male,7607,Noblejas,3.564,‰,40,municipio
+VICTORIANO-m,VICTORIANO,Male,7623,"Puebla de Almoradiel, La",1.975,‰,22,municipio
+VICTORIANO-m,VICTORIANO,Male,7639,Seseña,0.454,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,7640,Sonseca,2.263,‰,25,municipio
+VICTORIANO-m,VICTORIANO,Male,7646,Torrijos,1.008,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,7653,Villacañas,2.507,‰,28,municipio
+VICTORIANO-m,VICTORIANO,Male,7654,"Villa de Don Fadrique, La",3.959,‰,44,municipio
+VICTORIANO-m,VICTORIANO,Male,7670,Alaquàs,0.816,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,7675,Alboraia/Alboraya,0.393,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7676,Alcàsser,1.303,‰,15,municipio
+VICTORIANO-m,VICTORIANO,Male,7677,Alzira,0.216,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,7680,Aldaia,0.645,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,7721,Catarroja,0.337,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,7725,Quart de Poblet,0.551,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,7730,Xirivella,0.444,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,7744,Gandia,0.179,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,7772,Manises,0.627,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,7777,Massamagrell,0.706,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,7779,Meliana,1.117,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,7782,Mislata,0.583,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,7785,Montserrat,1.003,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,7799,Paiporta,0.44,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,7803,Paterna,0.245,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,7817,Requena,0.476,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,7832,Sueca,0.42,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,7893,Medina del Campo,0.606,‰,7,municipio
+VICTORIANO-m,VICTORIANO,Male,7991,Amorebieta-Etxano,1.037,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,7998,Barakaldo,0.528,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,7999,Basauri,0.511,‰,6,municipio
+VICTORIANO-m,VICTORIANO,Male,8002,Bilbao,0.406,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,8007,Durango,0.686,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,8013,Ermua,0.776,‰,9,municipio
+VICTORIANO-m,VICTORIANO,Male,8015,Galdakao,0.742,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,8021,Getxo,0.224,‰,3,municipio
+VICTORIANO-m,VICTORIANO,Male,8026,Leioa,0.376,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,8040,Portugalete,0.328,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,8042,Santurtzi,0.405,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,8044,Sestao,0.368,‰,4,municipio
+VICTORIANO-m,VICTORIANO,Male,8045,Sopela,0.677,‰,8,municipio
+VICTORIANO-m,VICTORIANO,Male,8071,Benavente,1.089,‰,12,municipio
+VICTORIANO-m,VICTORIANO,Male,8190,Toro,1.47,‰,17,municipio
+VICTORIANO-m,VICTORIANO,Male,8451,Ceuta,0.167,‰,2,municipio
+VICTORIANO-m,VICTORIANO,Male,8530,Íllora,1.199,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,8547,Granja de Torrehermosa,5.302,‰,60,municipio
+VICTORIANO-m,VICTORIANO,Male,8548,Jerez de los Caballeros,2.899,‰,33,municipio
+VICTORIANO-m,VICTORIANO,Male,8568,San Cristóbal de La Laguna,0.453,‰,5,municipio
+VICTORIANO-m,VICTORIANO,Male,8592,Tarazona,1.121,‰,13,municipio
+VICTORIANO-m,VICTORIANO,Male,8596,Pueblonuevo del Guadiana,6.192,‰,70,municipio
+VICTORIANO-m,VICTORIANO,Male,16474,Palencia,0.97,‰,11,municipio
+VICTORIANO-m,VICTORIANO,Male,16550,Torrent,0.389,‰,4,municipio

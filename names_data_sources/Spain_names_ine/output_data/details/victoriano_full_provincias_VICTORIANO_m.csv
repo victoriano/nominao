@@ -1,0 +1,54 @@
+nombre_id,nombre,gender,region_id,region_name,percentage,unidad,persons,region_type
+VICTORIANO-m,VICTORIANO,Male,2,Araba/Álava,0.6,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,3,Albacete,0.611,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,4,Alicante/Alacant,0.3,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,5,Almería,0.278,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,6,Ávila,1.042,‰,12,provincia
+VICTORIANO-m,VICTORIANO,Male,7,Badajoz,1.575,‰,18,provincia
+VICTORIANO-m,VICTORIANO,Male,8,"Balears, Illes",0.252,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,9,Barcelona,0.282,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,10,Burgos,0.64,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,11,Cáceres,1.364,‰,15,provincia
+VICTORIANO-m,VICTORIANO,Male,12,Cádiz,0.308,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,13,Castellón/Castelló,0.308,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,14,Ciudad Real,1.432,‰,16,provincia
+VICTORIANO-m,VICTORIANO,Male,15,Córdoba,0.515,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,16,"Coruña, A",0.281,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,17,Cuenca,0.986,‰,11,provincia
+VICTORIANO-m,VICTORIANO,Male,18,Girona,0.25,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,19,Granada,0.478,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,20,Guadalajara,0.521,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,21,Gipuzkoa,0.533,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,22,Huelva,0.576,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,23,Huesca,0.241,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,24,Jaén,0.434,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,25,León,0.537,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,26,Lleida,0.156,‰,2,provincia
+VICTORIANO-m,VICTORIANO,Male,27,"Rioja, La",0.656,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,28,Lugo,0.431,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,29,Madrid,0.507,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,30,Málaga,0.291,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,31,Murcia,0.357,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,32,Navarra,0.402,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,33,Asturias,0.334,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,34,Palencia,0.779,‰,9,provincia
+VICTORIANO-m,VICTORIANO,Male,35,"Palmas, Las",0.347,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,36,Pontevedra,0.402,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,37,Salamanca,1.367,‰,15,provincia
+VICTORIANO-m,VICTORIANO,Male,38,Santa Cruz de Tenerife,0.354,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,39,Cantabria,0.66,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,40,Segovia,0.777,‰,9,provincia
+VICTORIANO-m,VICTORIANO,Male,41,Sevilla,0.314,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,42,Soria,0.94,‰,11,provincia
+VICTORIANO-m,VICTORIANO,Male,43,Tarragona,0.279,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,44,Teruel,0.627,‰,7,provincia
+VICTORIANO-m,VICTORIANO,Male,45,Toledo,0.883,‰,10,provincia
+VICTORIANO-m,VICTORIANO,Male,46,Valencia/València,0.339,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,47,Valladolid,0.52,‰,6,provincia
+VICTORIANO-m,VICTORIANO,Male,48,Bizkaia,0.448,‰,5,provincia
+VICTORIANO-m,VICTORIANO,Male,49,Zamora,1.14,‰,13,provincia
+VICTORIANO-m,VICTORIANO,Male,50,Zaragoza,0.329,‰,4,provincia
+VICTORIANO-m,VICTORIANO,Male,51,Ceuta,0.167,‰,2,provincia
+VICTORIANO-m,VICTORIANO,Male,52,Melilla,0.0,‰,0,provincia
+VICTORIANO-m,VICTORIANO,Male,53,Ourense,0.246,‰,3,provincia
+VICTORIANO-m,VICTORIANO,Male,16473,Desconocido,0.44,‰,5,provincia

@@ -22,12 +22,9 @@ A data collection and processing tool for gathering name statistics from various
 │       ├── main.py         # Main pipeline script
 │       ├── download_INE_names.py
 │       ├── process_INE_names.py
-│       ├── enrich_INE_names.py
-│       ├── enrich_names_with_origin.py  # AI origin classification
+│       ├── enrich_names.py              # Ultra-fast AI enrichment (Gemini/OpenAI)
 │       └── output_data/    # Processed CSV files (tracked)
-│           ├── names_frecuencia_edad_media.csv
-│           ├── names_with_origin.csv
-│           └── names_with_origin_random_sample.csv
+│           └── names_frecuencia_edad_media.csv
 └── requirements.txt        # Project dependencies
 ```
 
@@ -112,214 +109,43 @@ uv run main.py --skip-download    # Skip download, use existing data
 
 #### Basic Data Processing
 
-**Option 1: Using uv from project root (recommended):**
-```bash
-uv run names_data_sources/Spain_names_ine/main.py              # Complete pipeline
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich # Skip API enrichment (faster)
-```
+### Spanish INE Names Data
 
-**Option 2: From Spanish directory:**
-```bash
-cd names_data_sources/Spain_names_ine
-source ../../.venv/bin/activate
-python main.py                    # Runs complete pipeline (including enrichment)
-python main.py --skip-enrich      # Skip API enrichment (faster)
-```
-
-#### Integrated Pipeline with AI Origin Classification
-
-**NEW**: Run the complete pipeline including AI-powered origin classification in one command!
-
-##### Quick Examples
+Run the entire pipeline (download → process → AI enrichment) in a single command:
 
 ```bash
-# Basic usage with origin classification (100 names by default)
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins
+# Sequential (first N names)
+uv run names_data_sources/Spain_names_ine/main.py --origin-mode sequential --origin-count 200
 
-# Random sample of 50 names with classification
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 50
+# Random sample (requires OPENAI/Gemini environment vars as needed)
+uv run names_data_sources/Spain_names_ine/main.py --origin-mode random --origin-count 500 --origin-provider openai --origin-model gpt-4o-mini
 
-# Sequential processing with custom output
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-count 200 --origin-output my_classified_names.csv
-
-# Full pipeline with all processing stages (including INE enrichment and origin classification)
-export GEMINI_API_KEY='your_key_here'
-uv run names_data_sources/Spain_names_ine/main.py --classify-origins --origin-mode random --origin-count 100
+# Full dataset (sequential, may take hours)
+uv run names_data_sources/Spain_names_ine/main.py --origin-mode all --origin-provider gemini --origin-model gemini-2.5-flash --origin-tier level1
 ```
 
-##### Pipeline Options
+Key flags:
+- `--origin-mode`: `sequential`, `random`, or `all`
+- `--origin-count`: number of names (ignored when `--origin-mode all`)
+- `--origin-provider`: `gemini` or `openai`
+- `--origin-model`: provider-specific model (e.g. `gemini-2.5-flash`, `gpt-4o-mini`)
+- `--origin-output`: optional custom CSV path
+- `--origin-max-concurrent`: override concurrency if you need to tune rate limits
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--classify-origins` | Enable AI origin classification after base processing | False |
-| `--origin-mode` | Classification mode: `sequential`, `random`, or `all` | sequential |
-| `--origin-count` | Number of names to classify (ignored if mode is `all`) | 100 |
-| `--origin-output` | Custom output file path for classification results | Auto-generated |
-| `--gemini-key` | Gemini API key (alternative to GEMINI_API_KEY env var) | None |
+Environment variables:
+- `GEMINI_API_KEY` (required when `--origin-provider gemini`)
+- `OPENAI_API_KEY` (required when `--origin-provider openai`)
 
-##### Common Use Cases
+Outputs:
+- `output_data/names_frecuencia_edad_media.csv`: base dataset with metrics
+- Ultra-fast enrichment CSV (default name: `names_ultra_fast_<provider>_<tier>.csv` or custom via `--origin-output`).
 
-**1. Quick Testing (5-10 random names):**
-```bash
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 5
-```
-
-**2. Statistical Sample (1000 random names):**
-```bash
-export GEMINI_API_KEY='your_key_here'
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 1000 --origin-output statistical_sample.csv
-```
-
-**3. Production Processing (First 10,000 names):**
-```bash
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-count 10000 --origin-output production_batch.csv
-```
-
-**4. Complete Dataset (WARNING: May take hours!):**
-```bash
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode all
-```
-
-##### Output Files Generated
-
-The integrated pipeline generates multiple files:
-
-1. **Base Processing Output:**
-   - `output_data/names_frecuencia_edad_media.csv` - Enriched with all metadata columns
-
-2. **Origin Classification & Enrichment Output:**
-   - Sequential mode: `output_data/names_with_origin.csv`
-   - Random mode: `output_data/names_with_origin_random_sample.csv`
-   - Custom: Your specified filename via `--origin-output`
-
-Each enriched file contains all original columns PLUS:
-- `Family_Origin`: The AI-classified etymological origin (35 categories)
-- `Name_Description`: Rich text description including etymology, cultural significance, and interesting facts
-- `Pronunciation_Spanish`: Pronunciation difficulty for Spanish speakers (muy fácil, fácil, difícil, muy difícil)
-- `Pronunciation_Foreign`: Pronunciation difficulty for foreign speakers (muy fácil, fácil, difícil, muy difícil)
-- `Pronunciation_Explanation`: Detailed explanation of pronunciation challenges
-
-**File Size Expectations:**
-- Base file: ~3.4 MB for complete dataset
-- Enriched file: Adds ~500-1000 bytes per name for descriptions
-- Example: 10 names = ~6 KB additional data
-
-**Example Output (Real Data):**
-```csv
-Nombre: ANGELA PIEDAD
-Frecuencia: 27
-Edad Media: 46.8
-Gender: Female
-Family_Origin: Español
-Name_Description: "ANGELA PIEDAD es un nombre compuesto de origen español que fusiona 
-dos conceptos de gran belleza y significado espiritual. Angela proviene del griego 
-'ángelos' (mensajero), evocando la imagen de los ángeles como mensajeros divinos. 
-Piedad, del latín 'pietas', representa devoción, compasión y amor filial..."
-```
-
-##### Pipeline Integration Benefits
-
-**Traditional Approach (Multiple Commands):**
-```bash
-# Step 1: Download and process
-cd names_data_sources/Spain_names_ine
-uv run python download_INE_names.py
-uv run python process_INE_names.py
-
-# Step 2: Optional enrichment
-uv run python enrich_INE_names.py  # or skip this
-
-# Step 3: Origin classification
-export GEMINI_API_KEY='your_key'
-uv run python enrich_names_with_origin.py --random 100
-```
-
-**Integrated Pipeline (Single Command):**
-```bash
-# All steps in one command!
-export GEMINI_API_KEY='your_key'
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich --classify-origins --origin-mode random --origin-count 100
-```
-
-**What it does:**
-- Downloads names data from INE (Instituto Nacional de Estadística)
-- Processes data to add analysis columns:
-  - Character and syllable counts
-  - Popularity rankings by gender
-  - Compound name identification
-  - Name percentage calculations
-- **By default:** Enriches data with regional distribution via INE API
-- **Options:** Use `--skip-enrich` to skip API calls for faster execution
-- Outputs: `output_data/names_frecuencia_edad_media.csv` with comprehensive name statistics
-
-#### AI-Powered Origin Classification & Enrichment (Standalone)
-
-**NEW**: Advanced AI-powered enrichment for Spanish names using Google Gemini, including etymological origin classification and detailed descriptions.
-
-> **Note**: This section covers standalone usage. For integrated pipeline usage, see [Integrated Pipeline with AI Origin Classification](#integrated-pipeline-with-ai-origin-classification) below.
-
-**Setup Requirements:**
-```bash
-# Set your Gemini API key
-export GEMINI_API_KEY='your_api_key_here'
-
-# Run basic pipeline first to generate base data
-uv run names_data_sources/Spain_names_ine/main.py --skip-enrich
-```
-
-**Usage Options:**
-
-**Quick Test (No File Output):**
-```bash
-cd names_data_sources/Spain_names_ine
-
-# Test with 5 random names (default)
-uv run python enrich_names_with_origin.py --test-random
-
-# Test with specific number of random names
-uv run python enrich_names_with_origin.py --test-random 10
-```
-
-**Sequential Processing (First N Names):**
-```bash
-# Process first 10 names (default)
-uv run python enrich_names_with_origin.py
-
-# Process first 50 names
-uv run python enrich_names_with_origin.py --num 50
-
-# Process first 100 names
-uv run python enrich_names_with_origin.py --num 100
-```
-
-**Random Sampling (With File Output):**
-```bash
-# Process 25 random names and save to file
-uv run python enrich_names_with_origin.py --random 25
-
-# Process 100 random names and save to file
-uv run python enrich_names_with_origin.py --random 100
-```
-
-**Complete Processing:**
-```bash
-# Process ALL names (requires confirmation - may take hours!)
-uv run python enrich_names_with_origin.py --all
-```
-
-**Speed Control:**
-```bash
-# Use custom delay between API calls (default: 1.0 second)
-uv run python enrich_names_with_origin.py --num 20 --delay 0.5
-```
-
-**Help and Options:**
-```bash
-# View all available options
-uv run python enrich_names_with_origin.py --help
-```
-
-#### Origin Categories (35 Total)
+Each enriched file includes:
+- `Family_Origin`
+- `Name_Description`
+- `Pronunciation_Spanish`
+- `Pronunciation_Foreign`
+- `Pronunciation_Explanation`
 
 **Main Categories:**
 - **Español**: Spanish names, including castellanized and culturally assimilated names (Hebrew/Biblical, Latin)
