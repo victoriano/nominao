@@ -96,7 +96,10 @@ df = pd.read_csv(input_file)
 df.to_csv(output_file, index=False)
 
 compound_df = identify_compound_names(str(output_file))
-simple_df = compound_df[~compound_df['Is_Compound']].copy()
+simple_df = compound_df[
+    (~compound_df['Is_Compound'])
+    & (compound_df['Gender'].str.lower() == 'male')
+].copy()
 simple_df.to_csv(output_file, index=False)
 
 calculate_name_percentage(str(output_file))
