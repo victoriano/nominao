@@ -1,14 +1,16 @@
 from __future__ import annotations
 
 import re
+from dataclasses import asdict
 from pathlib import Path
 from typing import Iterable, Sequence, Tuple
 
 import pandas as pd
 
-from .ine_client import INEClient
-from .ine_fetchers import fetch_decade_records, fetch_region_records
-from .output_writers import write_dataclass_csv
+from utils.ine_client import INEClient
+from utils.ine_fetchers import fetch_decade_records, fetch_region_records
+import argparse
+import sys
 
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "output_data" / "3_data_download_INE_names_details"
 
@@ -103,6 +105,10 @@ def download_name_details(
     details_dir = (output_dir or DEFAULT_OUTPUT_DIR) / "details"
     details_dir.mkdir(parents=True, exist_ok=True)
 
+    all_decade_records: list[DecadeRecord] = []
+    all_municipality_records: list[RegionRecord] = []
+    all_province_records: list[RegionRecord] = []
+
     with INEClient.create() as client:
         for row in _iter_target_rows(df, names, limit):
             nombre = row["Nombre"]
@@ -117,10 +123,7 @@ def download_name_details(
                 gender=gender,
                 total_frequency=frecuencia,
             )
-            write_dataclass_csv(
-                decade_records,
-                details_dir / f"{file_prefix}_decades_{identifier}.csv",
-            )
+            all_decade_records.extend(decade_records)
 
             municipality_records = fetch_region_records(
                 client,
@@ -129,10 +132,7 @@ def download_name_details(
                 total_frequency=frecuencia,
                 vista="muni",
             )
-            write_dataclass_csv(
-                municipality_records,
-                details_dir / f"{file_prefix}_municipios_{identifier}.csv",
-            )
+            all_municipality_records.extend(municipality_records)
 
             province_records = fetch_region_records(
                 client,
@@ -141,9 +141,86 @@ def download_name_details(
                 total_frequency=frecuencia,
                 vista="prov",
             )
-            write_dataclass_csv(
-                province_records,
-                details_dir / f"{file_prefix}_provincias_{identifier}.csv",
-            )
+            all_province_records.extend(province_records)
+
+    _write_records(all_decade_records, details_dir / f"{file_prefix}_decades.csv")
+    _write_records(all_municipality_records, details_dir / f"{file_prefix}_municipios.csv")
+    _write_records(all_province_records, details_dir / f"{file_prefix}_provincias.csv")
+
+
+def _write_records(records: Sequence[object], output_path: Path) -> None:
+    if not records:
+        return
+
+    rows = [asdict(record) for record in records]
+    df = pd.DataFrame(rows)
+    if "nombre_id" in df.columns:
+        df = df.drop(columns=["nombre_id"])
+    df.to_csv(output_path, index=False)
+
+
+def _parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Download detailed INE data for given names.")
+    parser.add_argument("--base-csv", type=Path, required=True, help="Path to processed base CSV (phase 2 output).")
+    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR, help="Directory to write detail CSVs.")
+    parser.add_argument("--names", nargs="*", help="Explicit list of names to download (ignores --top).")
+    parser.add_argument("--gender", choices=["Male", "Female"], help="Restrict to a specific gender when selecting top names.")
+    parser.add_argument("--top", type=int, help="Number of top names by frequency to download (default if names not provided).")
+    parser.add_argument("--limit", type=int, help="Maximum number of rows to process (after filters).")
+    parser.add_argument("--file-prefix", default="details", help="Prefix for generated detail files.")
+    return parser.parse_args(argv)
+
+
+def _select_names(df: pd.DataFrame, *, names: Sequence[str] | None, gender: str | None, top: int | None) -> list[Tuple[str, str]]:
+    if names:
+        norm = [name.upper() for name in names]
+        result: list[Tuple[str, str]] = []
+        for nombre in norm:
+            subset = df[df["Nombre"] == nombre]
+            if gender:
+                subset = subset[subset["Gender"].str.lower() == gender.lower()]
+            if subset.empty:
+                print(f"Skipping {nombre}: not found in dataset", file=sys.stderr)
+                continue
+            for _, row in subset.iterrows():
+                result.append((row["Nombre"], row["Gender"]))
+        return result
+
+    subset = df
+    if gender:
+        subset = subset[subset["Gender"].str.lower() == gender.lower()]
+
+    subset = subset.sort_values(by=["Gender", "Frecuencia"], ascending=[True, False])
+    if top:
+        subset = subset.head(top)
+
+    return [(row["Nombre"], row["Gender"]) for _, row in subset.iterrows()]
+
+
+def main(argv: Sequence[str] | None = None) -> None:
+    args = _parse_args(argv)
+
+    if not args.base_csv.exists():
+        print(f"Error: base CSV not found: {args.base_csv}", file=sys.stderr)
+        sys.exit(1)
+
+    df = _load_base_dataframe(args.base_csv)
+    targets = _select_names(df, names=args.names, gender=args.gender, top=args.top)
+
+    if not targets:
+        print("No names selected for details download.", file=sys.stderr)
+        sys.exit(0)
+
+    download_name_details(
+        args.base_csv,
+        names=targets,
+        limit=args.limit,
+        output_dir=args.output_dir,
+        file_prefix=args.file_prefix,
+    )
+
+
+if __name__ == "__main__":
+    main()
 
 

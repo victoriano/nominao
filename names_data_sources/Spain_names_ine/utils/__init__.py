@@ -1,6 +1,5 @@
 """Utility helpers for INE data ingestion."""
 
-from .download_INE_names_details import download_name_details  # noqa: F401
 from .ine_client import INEClient, batched  # noqa: F401
 from .ine_fetchers import (  # noqa: F401
     DecadeRecord,
@@ -17,7 +16,6 @@ from .population_lookup import (  # noqa: F401
 )
 
 __all__ = [
-    "download_name_details",
     "INEClient",
     "batched",
     "DecadeRecord",
