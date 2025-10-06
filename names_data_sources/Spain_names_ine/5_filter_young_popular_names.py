@@ -94,7 +94,7 @@ Examples:
         if not input_file.is_absolute():
             input_file = script_dir / args.input_file
     else:
-        input_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
+        input_file = script_dir / 'output_data' / '2_data_process_INE_names' / 'names_frecuencia_edad_media.csv'
     
     # Output file
     if args.output_file:
@@ -102,7 +102,7 @@ Examples:
         if not output_file.is_absolute():
             output_file = script_dir / args.output_file
     else:
-        output_file = script_dir / 'output_data' / f'young_popular_names_age{args.max_age}_top{args.top_n}.csv'
+        output_file = script_dir / 'output_data' / '5_data_filter_young_popular_names' / f'young_popular_names_age{args.max_age}_top{args.top_n}.csv'
     
     # Check if input file exists
     if not input_file.exists():

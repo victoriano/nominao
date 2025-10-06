@@ -21,13 +21,17 @@ def run_script(script_path, args=None):
         return False
 
 
-def build_ultrafast_args(args, base_file: Path):
+OUTPUT_ROOT = Path(__file__).parent / "output_data"
+
+
+def build_ultrafast_args(args, base_file: Path, output_dir: Path):
     uf_args = [
         "--input-file", str(base_file),
         "--provider", args.origin_provider,
         "--model", args.origin_model,
         "--tier", args.origin_tier,
         "--mode", "random" if args.origin_mode == "random" else "sequential",
+        "--output-file", str(output_dir / f"names_ultra_fast_{args.origin_provider}_{args.origin_tier}.csv"),
     ]
 
     if args.origin_mode == "all":
@@ -74,9 +78,11 @@ def main():
         os.environ["GEMINI_API_KEY"] = args.gemini_key
 
     current_dir = Path(__file__).parent
-    download_script = current_dir / "download_INE_names.py"
-    process_script = current_dir / "process_INE_names.py"
-    enrich_script = current_dir / "enrich_names.py"
+    download_script = current_dir / "1_download_INE_names.py"
+    process_script = current_dir / "2_process_INE_names.py"
+    details_script = current_dir / "3_download_INE_names_details.py"
+    enrich_script = current_dir / "4_enrich_names.py"
+    filter_script = current_dir / "5_filter_young_popular_names.py"
 
     print("Starting Spanish INE names data processing pipeline...")
     print("=" * 60)
@@ -87,27 +93,47 @@ def main():
     if not run_script(process_script):
         sys.exit(1)
 
-    base_file = current_dir / "output_data" / "names_frecuencia_edad_media.csv"
+    base_file = OUTPUT_ROOT / "1_data_download_INE_names" / "names_frecuencia_edad_media.csv"
     if not base_file.exists():
         print(f"Error: Base file not found: {base_file}")
         sys.exit(1)
 
-    ul_args = build_ultrafast_args(args, base_file)
+    # Download details after processing phase (sample names to keep runtime small)
+    details_output_dir = OUTPUT_ROOT / "3_data_download_INE_names_details"
+    details_output_dir.mkdir(parents=True, exist_ok=True)
+    details_args = [
+        "--base-csv", str(OUTPUT_ROOT / "2_data_process_INE_names" / "names_frecuencia_edad_media.csv"),
+        "--output-dir", str(details_output_dir),
+        "--names", "VICTORIANO", "--names", "CARLOS",
+        "--limit", "10",
+    ]
+    run_script(details_script, details_args)
+
+    enrich_output_dir = OUTPUT_ROOT / "4_data_enrich_names"
+    enrich_output_dir.mkdir(parents=True, exist_ok=True)
+    ul_args = build_ultrafast_args(args, base_file, enrich_output_dir)
 
     if run_script(enrich_script, ul_args):
         print("\nUltra-fast origin classification completed successfully!")
     else:
         print("\nFailed to complete ultra-fast origin classification.")
 
+    filter_output_dir = OUTPUT_ROOT / "5_data_filter_young_popular_names"
+    filter_output_dir.mkdir(parents=True, exist_ok=True)
+    filter_input = OUTPUT_ROOT / "2_data_process_INE_names" / "names_frecuencia_edad_media.csv"
+    filter_output = filter_output_dir / "young_popular_names.csv"
+    filter_args = ["--input-file", str(filter_input), "--output-file", str(filter_output)]
+    run_script(filter_script, filter_args)
+
     print("\n" + "=" * 60)
     print("Spanish INE names data processing pipeline completed!")
     print("\nOutput files:")
-    print(f"- Base data: {base_file}")
+    print(f"- Base data (phase 1): {base_file}")
     if args.origin_output:
-        print(f"- Origin data: {current_dir / args.origin_output}")
+        print(f"- Origin data (phase 4): {current_dir / args.origin_output}")
     else:
         default_name = f"names_ultra_fast_{args.origin_provider}_{args.origin_tier}.csv"
-        print(f"- Origin data: {current_dir / 'output_data' / default_name}")
+        print(f"- Origin data (phase 4): {OUTPUT_ROOT / '4_data_enrich_names' / default_name}")
 
 
 if __name__ == "__main__":

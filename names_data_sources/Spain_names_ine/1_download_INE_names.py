@@ -35,7 +35,8 @@ def download_base_names_dataset(
         requests.HTTPError: If the download request fails.
     """
 
-    output_path = Path(output_dir) if output_dir else Path(__file__).parent / "output_data"
+    default_output_dir = Path(__file__).parent / "output_data" / "1_data_download_INE_names"
+    output_path = Path(output_dir) if output_dir else default_output_dir
     output_path.mkdir(parents=True, exist_ok=True)
 
     http = session or requests.Session()
@@ -72,29 +73,6 @@ def download_base_names_dataset(
     final_df.to_csv(output_file, index=False)
 
     return output_file
-
-
-def download_names_with_details(
-    names: list[str] | list[tuple[str, str]] | None = None,
-    *,
-    limit: int | None = None,
-    output_dir: Path | None = None,
-    file_prefix: str = "names",
-) -> None:
-    """Download the base dataset, then fetch detailed stats for selected names."""
-
-    base_csv = download_base_names_dataset()
-
-    # Deferred import to avoid circular references when utils imports this module.
-    from .utils import download_name_details
-
-    download_name_details(
-        base_csv,
-        names=names,
-        limit=limit,
-        output_dir=output_dir,
-        file_prefix=file_prefix,
-    )
 
 
 def main() -> None:

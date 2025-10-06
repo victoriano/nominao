@@ -86,8 +86,19 @@ def identify_compound_names(csv_file_path):
 
 # Call the function with the path to your CSV file
 script_dir = Path(__file__).parent
-csv_file = script_dir / 'output_data' / 'names_frecuencia_edad_media.csv'
-calculate_name_percentage(str(csv_file))
-add_name_popularity_rank(str(csv_file))
-identify_compound_names(str(csv_file))
-add_syllable_and_character_counts(str(csv_file))
+input_file = script_dir / 'output_data' / '1_data_download_INE_names' / 'names_frecuencia_edad_media.csv'
+output_dir = script_dir / 'output_data' / '2_data_process_INE_names'
+output_dir.mkdir(parents=True, exist_ok=True)
+output_file = output_dir / 'names_frecuencia_edad_media.csv'
+
+# Start from the downloaded dataset to avoid mutating the original file
+df = pd.read_csv(input_file)
+df.to_csv(output_file, index=False)
+
+compound_df = identify_compound_names(str(output_file))
+simple_df = compound_df[~compound_df['Is_Compound']].copy()
+simple_df.to_csv(output_file, index=False)
+
+calculate_name_percentage(str(output_file))
+add_name_popularity_rank(str(output_file))
+add_syllable_and_character_counts(str(output_file))

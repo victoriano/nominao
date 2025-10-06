@@ -10,7 +10,7 @@ from .ine_client import INEClient
 from .ine_fetchers import fetch_decade_records, fetch_region_records
 from .output_writers import write_dataclass_csv
 
-DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent.parent / "output_data"
+DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "output_data" / "3_data_download_INE_names_details"
 
 
 def _load_base_dataframe(csv_path: Path) -> pd.DataFrame:

@@ -444,7 +444,7 @@ def main() -> None:
         if not input_file.is_absolute():
             input_file = script_dir / args.input_file
     else:
-        input_file = script_dir / "output_data" / "names_frecuencia_edad_media.csv"
+        input_file = script_dir / "output_data" / "2_data_process_INE_names" / "names_frecuencia_edad_media.csv"
 
     if args.output_file:
         output_file = Path(args.output_file)
@@ -452,7 +452,7 @@ def main() -> None:
             output_file = script_dir / args.output_file
     else:
         default_name = f"names_ultra_fast_{args.provider}_{args.tier}.csv"
-        output_file = script_dir / "output_data" / default_name
+        output_file = script_dir / "output_data" / "4_data_enrich_names" / default_name
 
     if not input_file.exists():
         print(f"Error: Input file not found: {input_file}")
